@@ -11,9 +11,9 @@ class LengthConstaint {
     public function __construct($min, $max) {}
 }
 
-LengthConstraint
-EmailConstraint
-AlphaConstraint
+//LengthConstraint
+//EmailConstraint
+//AlphaConstraint
 
 class Validator {
     public function __construct() {
@@ -32,9 +32,9 @@ class UserProfileValidator extends BaseValidator {
 
 //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// ////
 
-arrayStrat
-objeStart
-getterStrat
+//arrayStrat
+//objeStart
+//getterStrat
 
 //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// ////
 
@@ -72,8 +72,7 @@ $validator->validate($data, [
         (new EmailConstaint())
             ->restrictTLDs(['com', 'ch'])
             ->setAllowedSpecialCharacters(['-', '_']),
-
     ]
 ]);
 
-//// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// 
+//// //// //// //// //// //// //// //// //// //// //// //// //// //// //// ////
