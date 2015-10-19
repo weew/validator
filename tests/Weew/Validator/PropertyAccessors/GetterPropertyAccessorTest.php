@@ -10,10 +10,17 @@ use Weew\Validator\PropertyAccessors\GetterPropertyAccessor;
 class GetterPropertyAccessorTest extends PHPUnit_Framework_TestCase {
     public function test_supports() {
         $accessor = new GetterPropertyAccessor();
-        $this->assertFalse($accessor->supports('foo'));
-        $this->assertFalse($accessor->supports(1));
-        $this->assertFalse($accessor->supports([]));
-        $this->assertTrue($accessor->supports(new stdClass()));
+        $this->assertFalse($accessor->supports('foo', 'foo'));
+        $this->assertFalse($accessor->supports(1, 'foo'));
+        $this->assertFalse($accessor->supports([], 'foo'));
+        $this->assertFalse($accessor->supports(new stdClass(), 'foo'));
+
+        $object = new TestObject();
+
+        $this->assertTrue($accessor->supports($object, 'foo'));
+        $this->assertTrue($accessor->supports($object, 'bar'));
+        $this->assertTrue($accessor->supports($object, 'foobar'));
+        $this->assertFalse($accessor->supports($object, 'baz'));
     }
 
     public function test_get_property() {
@@ -23,6 +30,5 @@ class GetterPropertyAccessorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('foo', $accessor->getProperty($object, 'foo'));
         $this->assertEquals('bar', $accessor->getProperty($object, 'bar'));
         $this->assertEquals('foobar', $accessor->getProperty($object, 'foobar'));
-        $this->assertNull($accessor->getProperty($object, 'baz'));
     }
 }

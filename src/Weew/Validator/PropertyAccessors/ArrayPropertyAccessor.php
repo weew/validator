@@ -7,11 +7,12 @@ use Weew\Validator\IPropertyAccessor;
 class ArrayPropertyAccessor implements IPropertyAccessor {
     /**
      * @param $abstract
+     * @param $property
      *
      * @return bool
      */
-    public function supports($abstract) {
-        return is_array($abstract);
+    public function supports($abstract, $property) {
+        return is_array($abstract) && array_has($abstract, $property);
     }
 
     /**

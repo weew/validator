@@ -7,11 +7,12 @@ use Weew\Validator\IPropertyAccessor;
 class ObjectPropertyAccessor implements IPropertyAccessor {
     /**
      * @param $abstract
+     * @param $property
      *
      * @return bool
      */
-    public function supports($abstract) {
-        return is_object($abstract);
+    public function supports($abstract, $property) {
+        return is_object($abstract) && property_exists($abstract, $property);
     }
 
     /**
@@ -21,8 +22,6 @@ class ObjectPropertyAccessor implements IPropertyAccessor {
      * @return mixed
      */
     public function getProperty($abstract, $property) {
-        if (property_exists($abstract, $property)) {
-            return $abstract->{$property};
-        }
+        return $abstract->{$property};
     }
 }

@@ -5,10 +5,11 @@ namespace Weew\Validator;
 interface IPropertyAccessor {
     /**
      * @param $abstract
+     * @param $property
      *
      * @return bool
      */
-    function supports($abstract);
+    function supports($abstract, $property);
 
     /**
      * @param $abstract

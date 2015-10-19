@@ -2,32 +2,56 @@
 
 namespace Weew\Validator;
 
+use Weew\Validator\PropertyAccessors\ArrayPropertyAccessor;
+use Weew\Validator\PropertyAccessors\GetterPropertyAccessor;
+use Weew\Validator\PropertyAccessors\ObjectPropertyAccessor;
+
 class Validator implements IValidator {
     /**
      * @var IPropertyAccessor[]
      */
-    protected $accessors;
+    protected $propertyAccessors;
 
     /**
-     * @param IPropertyAccessor $accessor
+     * @param array|null $propertyAccessors
      */
-    public function addAccessor(IPropertyAccessor $accessor) {
-        $this->accessors[] = $accessor;
+    public function __construct(array $propertyAccessors = null) {
+        if ($propertyAccessors === null) {
+            $propertyAccessors = $this->createPropertyAccessors();
+        }
+
+        $this->setPropertyAccessors($propertyAccessors);
     }
 
     /**
-     * @param array $accessors
-     *
+     * @param IPropertyAccessor $propertyAccessor
+     */
+    public function addPropertyAccessor(IPropertyAccessor $propertyAccessor) {
+        $this->propertyAccessors[] = $propertyAccessor;
+    }
+
+    /**
      * @return IPropertyAccessor[]
      */
-    public function getAccessors(array $accessors) {
-        return $this->accessors;
+    public function getPropertyAccessors() {
+        return $this->propertyAccessors;
     }
 
     /**
-     * @param array $accessors
+     * @param array $propertyPropertyAccessors
      */
-    public function setAccessors(array $accessors) {
-        $this->accessors = $accessors;
+    public function setPropertyAccessors(array $propertyPropertyAccessors) {
+        $this->propertyAccessors = $propertyPropertyAccessors;
+    }
+
+    /**
+     * @return array
+     */
+    protected function createPropertyAccessors() {
+        return [
+            new ArrayPropertyAccessor(),
+            new ObjectPropertyAccessor(),
+            new GetterPropertyAccessor(),
+        ];
     }
 }

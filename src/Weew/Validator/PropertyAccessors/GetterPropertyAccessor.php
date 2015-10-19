@@ -7,11 +7,18 @@ use Weew\Validator\IPropertyAccessor;
 class GetterPropertyAccessor implements IPropertyAccessor {
     /**
      * @param $abstract
+     * @param $property
      *
      * @return bool
      */
-    public function supports($abstract) {
-        return is_object($abstract);
+    public function supports($abstract, $property) {
+        if (is_object($abstract)) {
+            return is_callable(
+                [$abstract, $this->getPropertyAccessorName($property)]
+            );
+        }
+
+        return false;
     }
 
     /**
@@ -21,11 +28,17 @@ class GetterPropertyAccessor implements IPropertyAccessor {
      * @return mixed
      */
     public function getProperty($abstract, $property) {
-        $accessor = s('get%s', ucfirst($property));
-        $callable = [$abstract, $accessor];
+        return call_user_func(
+            [$abstract, $this->getPropertyAccessorName($property)]
+        );
+    }
 
-        if (is_callable($callable)) {
-            return call_user_func($callable);
-        }
+    /**
+     * @param $property
+     *
+     * @return string
+     */
+    protected function getPropertyAccessorName($property) {
+        return s('get%s', ucfirst($property));
     }
 }

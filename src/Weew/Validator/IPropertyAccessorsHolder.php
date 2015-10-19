@@ -4,19 +4,17 @@ namespace Weew\Validator;
 
 interface IPropertyAccessorsHolder {
     /**
-     * @param IPropertyAccessor $accessor
+     * @param IPropertyAccessor $propertyAccessor
      */
-    function addAccessor(IPropertyAccessor $accessor);
+    function addPropertyAccessor(IPropertyAccessor $propertyAccessor);
 
     /**
-     * @param array $accessors
-     *
      * @return IPropertyAccessor[]
      */
-    function getAccessors(array $accessors);
+    function getPropertyAccessors();
 
     /**
-     * @param array $accessors
+     * @param array $propertyAccessors
      */
-    function setAccessors(array $accessors);
+    function setPropertyAccessors(array $propertyAccessors);
 }
