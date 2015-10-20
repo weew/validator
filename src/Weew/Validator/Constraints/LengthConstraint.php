@@ -4,6 +4,9 @@ namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
 
+/**
+ * Check if the value has exactly the given length.
+ */
 class LengthConstraint implements IConstraint {
     /**
      * @var int
@@ -26,6 +29,8 @@ class LengthConstraint implements IConstraint {
         if (is_string($string)) {
             return strlen($string) === $this->length;
         }
+
+        return false;
     }
 
     /**
