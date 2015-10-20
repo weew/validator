@@ -4,6 +4,9 @@ namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
 
+/**
+ * Check if the value is in the list of allowed values.
+ */
 class AllowedConstraint implements IConstraint {
     /**
      * @var array
