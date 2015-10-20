@@ -4,6 +4,9 @@ namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
 
+/**
+ * Check if the value equals the given value.
+ */
 class EqualsConstraint implements IConstraint {
     /**
      * @var mixed
