@@ -8,6 +8,7 @@ use Weew\Validator\Constraints\MacAddressConstraint;
 class MacAddressConstraintTest extends PHPUnit_Framework_TestCase {
     public function test_check() {
         $c = new MacAddressConstraint();
+        $this->assertFalse($c->check(1));
         $this->assertFalse($c->check('foo'));
         $this->assertFalse($c->check('01:23:45:67:89'));
         $this->assertTrue($c->check('01:23:45:67:89:ab'));
