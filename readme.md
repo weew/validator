@@ -9,3 +9,5 @@
 
 - One commit for each constraint
 - Expected code coverage is 100%
+- Each constraint must have a comment about what it does
+- Work on a separate branch (team members) or fork
