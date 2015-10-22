@@ -2,56 +2,93 @@
 
 namespace Weew\Validator;
 
-use Weew\Validator\PropertyAccessors\ArrayPropertyAccessor;
-use Weew\Validator\PropertyAccessors\GetterPropertyAccessor;
-use Weew\Validator\PropertyAccessors\ObjectPropertyAccessor;
-
 class Validator implements IValidator {
     /**
-     * @var IPropertyAccessor[]
+     * @var IPropertyReader
      */
-    protected $propertyAccessors;
+    protected $propertyReader;
 
     /**
-     * @param array|null $propertyAccessors
+     * @var IConstraintGroup[]
      */
-    public function __construct(array $propertyAccessors = null) {
-        if ($propertyAccessors === null) {
-            $propertyAccessors = $this->createPropertyAccessors();
+    protected $constraints = [];
+
+    /**
+     * @param IPropertyReader|null $propertyReader
+     */
+    public function __construct(IPropertyReader $propertyReader = null) {
+        if ($propertyReader instanceof IPropertyReader) {
+            $propertyReader = $this->createPropertyReader();
         }
 
-        $this->setPropertyAccessors($propertyAccessors);
+        $this->setPropertyReader($propertyReader);
     }
 
     /**
-     * @param IPropertyAccessor $propertyAccessor
+     * @param $data
+     * @param array $groups
+     *
+     * @return IValidationResult
      */
-    public function addPropertyAccessor(IPropertyAccessor $propertyAccessor) {
-        $this->propertyAccessors[] = $propertyAccessor;
+    public function check($data, array $groups = []) {
+        $groups = array_extend($this->getConstraints(), $groups);
+        $result = $this->applyConstraints($data, $groups);
+
+        return $result;
     }
 
     /**
-     * @return IPropertyAccessor[]
+     * @return IConstraintGroup[]
      */
-    public function getPropertyAccessors() {
-        return $this->propertyAccessors;
+    public function getConstraints() {
+        return $this->constraints;
     }
 
     /**
-     * @param array $propertyPropertyAccessors
+     * @return IPropertyReader
      */
-    public function setPropertyAccessors(array $propertyPropertyAccessors) {
-        $this->propertyAccessors = $propertyPropertyAccessors;
+    public function getPropertyReader() {
+        return $this->propertyReader;
     }
 
     /**
-     * @return array
+     * @param IPropertyReader $propertyReader
      */
-    protected function createPropertyAccessors() {
-        return [
-            new ArrayPropertyAccessor(),
-            new ObjectPropertyAccessor(),
-            new GetterPropertyAccessor(),
-        ];
+    public function setPropertyReader(IPropertyReader $propertyReader) {
+        $this->propertyReader = $propertyReader;
+    }
+
+    /**
+     * @param $data
+     * @param IConstraintGroup[] $groups
+     *
+     * @return IValidationResult
+     */
+    protected function applyConstraints($data, array $groups) {
+        $result = new ValidationResult();
+
+        foreach ($groups as $group) {
+            $propertyName = $group->getName();
+
+            foreach ($group->getConstraints() as $constraint) {
+                $propertyValue = $this->getPropertyReader()
+                    ->readProperty($data, $propertyName);
+
+                if ( ! $constraint->check($propertyValue)) {
+                    $result->addError(
+                        new ValidationError($propertyName, $propertyValue, $constraint)
+                    );
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return PropertyReader
+     */
+    protected function createPropertyReader() {
+        return new PropertyReader();
     }
 }
