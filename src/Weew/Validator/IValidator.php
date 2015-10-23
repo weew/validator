@@ -24,5 +24,5 @@ interface IValidator {
     /**
      * @return IConstraintGroup[]
      */
-    function getConstraints();
+    function getConstraintGroups();
 }

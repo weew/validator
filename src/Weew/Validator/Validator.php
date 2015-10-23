@@ -11,18 +11,24 @@ class Validator implements IValidator {
     /**
      * @var IConstraintGroup[]
      */
-    protected $constraints = [];
+    protected $constraintGroups = [];
 
     /**
      * @param IPropertyReader|null $propertyReader
      */
     public function __construct(IPropertyReader $propertyReader = null) {
-        if ($propertyReader instanceof IPropertyReader) {
+        if ( ! $propertyReader instanceof IPropertyReader) {
             $propertyReader = $this->createPropertyReader();
         }
 
         $this->setPropertyReader($propertyReader);
+        $this->configure();
     }
+
+    /**
+     * Use this method as an extension point for custom validators.
+     */
+    protected function configure() {}
 
     /**
      * @param $data
@@ -31,17 +37,72 @@ class Validator implements IValidator {
      * @return IValidationResult
      */
     public function check($data, array $groups = []) {
-        $groups = array_extend($this->getConstraints(), $groups);
-        $result = $this->applyConstraints($data, $groups);
+        $groups = array_extend($this->getConstraintGroups(), $groups);
 
-        return $result;
+        return $this->applyConstraints($data, $groups);
+    }
+
+    /**
+     * @param $name
+     * @param IConstraint $constraint
+     *
+     * @return $this
+     */
+    public function addConstraint($name, IConstraint $constraint) {
+        $this->addConstraintGroup(new ConstraintGroup($name, [$constraint]));
+
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @param array $constraints
+     *
+     * @return $this
+     */
+    public function addConstraints($name, array $constraints) {
+        $this->addConstraintGroup(new ConstraintGroup($name, $constraints));
+
+        return $this;
+    }
+
+    /**
+     * @param IConstraintGroup $group
+     *
+     * @return $this
+     */
+    public function addConstraintGroup(IConstraintGroup $group) {
+        $currentGroup = $this->findConstraintGroup($group->getName());
+
+        if ($currentGroup instanceof IConstraintGroup) {
+            $currentGroup->addConstraints($group->getConstraints());
+        } else {
+            $this->constraintGroups[] = $group;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $name
+     *
+     * @return null|IConstraintGroup
+     */
+    protected function findConstraintGroup($name) {
+        foreach ($this->getConstraintGroups() as $group) {
+            if ($group->getName() === $name) {
+                return $group;
+            }
+        }
+
+        return null;
     }
 
     /**
      * @return IConstraintGroup[]
      */
-    public function getConstraints() {
-        return $this->constraints;
+    public function getConstraintGroups() {
+        return $this->constraintGroups;
     }
 
     /**
@@ -72,7 +133,7 @@ class Validator implements IValidator {
 
             foreach ($group->getConstraints() as $constraint) {
                 $propertyValue = $this->getPropertyReader()
-                    ->readProperty($data, $propertyName);
+                    ->getProperty($data, $propertyName);
 
                 if ( ! $constraint->check($propertyValue)) {
                     $result->addError(
