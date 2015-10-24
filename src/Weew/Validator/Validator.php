@@ -26,11 +26,6 @@ class Validator implements IValidator {
     }
 
     /**
-     * Use this method as an extension point for custom validators.
-     */
-    protected function configure() {}
-
-    /**
      * @param $data
      * @param array $groups
      *
@@ -40,6 +35,27 @@ class Validator implements IValidator {
         $groups = array_extend($this->getConstraintGroups(), $groups);
 
         return $this->applyConstraints($data, $groups);
+    }
+
+    /**
+     * @return IConstraintGroup[]
+     */
+    public function getConstraintGroups() {
+        return $this->constraintGroups;
+    }
+
+    /**
+     * @return IPropertyReader
+     */
+    public function getPropertyReader() {
+        return $this->propertyReader;
+    }
+
+    /**
+     * @param IPropertyReader $propertyReader
+     */
+    public function setPropertyReader(IPropertyReader $propertyReader) {
+        $this->propertyReader = $propertyReader;
     }
 
     /**
@@ -84,6 +100,11 @@ class Validator implements IValidator {
     }
 
     /**
+     * Use this method as an extension point for custom validators.
+     */
+    protected function configure() {}
+
+    /**
      * @param $name
      *
      * @return null|IConstraintGroup
@@ -96,27 +117,6 @@ class Validator implements IValidator {
         }
 
         return null;
-    }
-
-    /**
-     * @return IConstraintGroup[]
-     */
-    public function getConstraintGroups() {
-        return $this->constraintGroups;
-    }
-
-    /**
-     * @return IPropertyReader
-     */
-    public function getPropertyReader() {
-        return $this->propertyReader;
-    }
-
-    /**
-     * @param IPropertyReader $propertyReader
-     */
-    public function setPropertyReader(IPropertyReader $propertyReader) {
-        $this->propertyReader = $propertyReader;
     }
 
     /**
