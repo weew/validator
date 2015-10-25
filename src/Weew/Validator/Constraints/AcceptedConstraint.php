@@ -14,12 +14,12 @@ class AcceptedConstraint implements IConstraint {
     protected $validValues = ['yes', 'on', '1', 'true', 1, true];
 
     /**
-     * @param $abstract
+     * @param $value
      *
      * @return bool
      */
-    public function check($abstract) {
-        return in_array($abstract, $this->validValues, true);
+    public function check($value) {
+        return in_array($value, $this->validValues, true);
     }
 
     /**

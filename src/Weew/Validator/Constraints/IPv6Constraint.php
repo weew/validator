@@ -9,12 +9,12 @@ use Weew\Validator\IConstraint;
  */
 class IPv6Constraint implements IConstraint {
     /**
-     * @param $string
+     * @param $value
      *
      * @return bool
      */
-    public function check($string) {
-        return filter_var($string, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
+    public function check($value) {
+        return filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
     }
 
     /**

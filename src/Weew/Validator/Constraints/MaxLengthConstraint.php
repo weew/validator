@@ -21,13 +21,13 @@ class MaxLengthConstraint implements IConstraint {
     }
 
     /**
-     * @param $string
+     * @param $value
      *
      * @return bool
      */
-    public function check($string) {
-        if (is_string($string)) {
-            return strlen($string) <= $this->max;
+    public function check($value) {
+        if (is_string($value)) {
+            return strlen($value) <= $this->max;
         }
 
         return false;

@@ -21,12 +21,12 @@ class EqualsConstraint implements IConstraint {
     }
 
     /**
-     * @param $abstract
+     * @param $value
      *
      * @return bool
      */
-    public function check($abstract) {
-        return $abstract === $this->value;
+    public function check($value) {
+        return $value === $this->value;
     }
 
     /**

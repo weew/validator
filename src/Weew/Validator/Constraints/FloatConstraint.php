@@ -9,12 +9,12 @@ use Weew\Validator\IConstraint;
  */
 class FloatConstraint implements IConstraint {
     /**
-     * @param $abstract
+     * @param $value
      *
      * @return bool
      */
-    public function check($abstract) {
-        return is_float($abstract);
+    public function check($value) {
+        return is_float($value);
     }
 
     /**

@@ -6,9 +6,9 @@ use Weew\Foundation\Interfaces\IArrayable;
 
 interface IConstraint extends IArrayable {
     /**
-     * @param $abstract
+     * @param $value
      *
      * @return bool
      */
-    function check($abstract);
+    function check($value);
 }

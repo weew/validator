@@ -9,12 +9,12 @@ use Weew\Validator\IConstraint;
  */
 class NumericConstraint implements IConstraint {
     /**
-     * @param $abstract
+     * @param $value
      *
      * @return bool
      */
-    public function check($abstract) {
-        return is_numeric($abstract);
+    public function check($value) {
+        return is_numeric($value);
     }
 
     /**

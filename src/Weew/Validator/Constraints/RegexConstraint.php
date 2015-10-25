@@ -21,13 +21,13 @@ class RegexConstraint implements IConstraint {
     }
 
     /**
-     * @param $string
+     * @param $value
      *
      * @return bool
      */
-    public function check($string) {
-        if (is_string($string)) {
-            return preg_match($this->pattern, $string) === 1;
+    public function check($value) {
+        if (is_string($value)) {
+            return preg_match($this->pattern, $value) === 1;
         }
 
         return false;
