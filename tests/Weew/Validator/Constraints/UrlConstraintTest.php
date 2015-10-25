@@ -1,13 +1,12 @@
 <?php
 
 
-namespace Weew\Validator\Constraints;
-
+namespace Tests\Weew\Validator\Constraints;
 
 use PHPUnit_Framework_TestCase;
+use Weew\Validator\Constraints\UrlConstraint;
 
 class UrlConstraintTest extends PHPUnit_Framework_TestCase {
-
     public function test_check() {
         $c = new UrlConstraint();
         $this->assertTrue($c->check('ftp://ftp.is.co.za.example.org/rfc/rfc1808.txt'));
@@ -27,5 +26,4 @@ class UrlConstraintTest extends PHPUnit_Framework_TestCase {
         $c = new UrlConstraint();
         $this->assertEquals([], $c->toArray());
     }
-
 }
