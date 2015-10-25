@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\Weew\Validator\Constraints;
 
 use PHPUnit_Framework_TestCase;
@@ -19,7 +18,6 @@ class UrlConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($c->check('telnet://192.0.2.16:80/ '));
         $this->assertFalse($c->check('tel:+1-816-555-1212'));
         $this->assertFalse($c->check('urn:oasis:names:specification:docbook:dtd:xml:4.1.2'));
-
     }
 
     public function test_to_array() {

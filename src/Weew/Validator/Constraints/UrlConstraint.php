@@ -12,13 +12,13 @@ class UrlConstraint implements IConstraint {
      * Note, that any space characters in either the beginning or
      * the end of the string will result in a failure.
      *
-     * @param $abstract
+     * @param $value
      *
      * @return bool
      */
-    public function check($abstract) {
-        if (is_string($abstract)) {
-            return filter_var($abstract, FILTER_VALIDATE_URL) !== false;
+    public function check($value) {
+        if (is_string($value)) {
+            return filter_var($value, FILTER_VALIDATE_URL) !== false;
         }
 
         return false;
