@@ -16,7 +16,7 @@ class UrlConstraint implements IConstraint {
      *
      * @return bool
      */
-    function check($abstract) {
+    public function check($abstract) {
         if (is_string($abstract)) {
             return filter_var($abstract, FILTER_VALIDATE_URL) !== false;
         }
@@ -27,7 +27,7 @@ class UrlConstraint implements IConstraint {
     /**
      * @return array
      */
-    function toArray() {
+    public function toArray() {
         return [];
     }
 }
