@@ -8,6 +8,7 @@ use Weew\Validator\Constraints\UrlConstraint;
 class UrlConstraintTest extends PHPUnit_Framework_TestCase {
     public function test_check() {
         $c = new UrlConstraint();
+        $this->assertFalse($c->check(1));
         $this->assertTrue($c->check('ftp://ftp.is.co.za.example.org/rfc/rfc1808.txt'));
         $this->assertTrue($c->check('http://www.math.uio.no.example.net/faq/compression-faq/part1.html'));
         $this->assertTrue($c->check('mailto:mduerst@ifi.unizh.example.gov'));
