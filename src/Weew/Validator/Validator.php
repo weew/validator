@@ -91,7 +91,7 @@ class Validator implements IValidator {
         $currentGroup = $this->findConstraintGroup($group->getName());
 
         if ($currentGroup instanceof IConstraintGroup) {
-            $currentGroup->addConstraints($group->getConstraints());
+            $currentGroup->extend($group);
         } else {
             $this->constraintGroups[] = $group;
         }
@@ -129,17 +129,12 @@ class Validator implements IValidator {
         $result = new ValidationResult();
 
         foreach ($groups as $group) {
-            $propertyName = $group->getName();
+            $value = $this->getPropertyReader()
+                ->getProperty($data, $group->getName());
+            $groupResult = $group->check($value);
 
-            foreach ($group->getConstraints() as $constraint) {
-                $propertyValue = $this->getPropertyReader()
-                    ->getProperty($data, $propertyName);
-
-                if ( ! $constraint->check($propertyValue)) {
-                    $result->addError(
-                        new ValidationError($propertyName, $propertyValue, $constraint)
-                    );
-                }
+            if ($groupResult->isFailed()) {
+                $result->extend($groupResult);
             }
         }
 
