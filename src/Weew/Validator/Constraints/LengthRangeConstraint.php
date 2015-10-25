@@ -28,13 +28,13 @@ class LengthRangeConstraint implements IConstraint {
     }
 
     /**
-     * @param $string
+     * @param $value
      *
      * @return bool
      */
-    public function check($string) {
-        if (is_string($string)) {
-            $length = strlen($string);
+    public function check($value) {
+        if (is_string($value)) {
+            $length = strlen($value);
 
             return $length >= $this->min && $length <= $this->max;
         }

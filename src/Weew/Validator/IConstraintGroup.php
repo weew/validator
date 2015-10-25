@@ -32,4 +32,16 @@ interface IConstraintGroup {
      * @param IConstraint[] $constraints
      */
     function setConstraints(array $constraints);
+
+    /**
+     * @param IConstraintGroup $group
+     */
+    function extend(IConstraintGroup $group);
+
+    /**
+     * @param $value
+     *
+     * @return IValidationResult
+     */
+    function check($value);
 }

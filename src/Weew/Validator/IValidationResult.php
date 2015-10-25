@@ -32,4 +32,9 @@ interface IValidationResult {
      * @return int
      */
     function errorCount();
+
+    /**
+     * @param IValidationResult $result
+     */
+    function extend(IValidationResult $result);
 }

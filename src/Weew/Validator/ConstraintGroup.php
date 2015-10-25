@@ -66,4 +66,30 @@ class ConstraintGroup implements IConstraintGroup {
         $this->constraints = [];
         $this->addConstraints($constraints);
     }
+
+    /**
+     * @param IConstraintGroup $group
+     */
+    public function extend(IConstraintGroup $group) {
+        $this->addConstraints($group->getConstraints());
+    }
+
+    /**
+     * @param $value
+     *
+     * @return ValidationResult
+     */
+    public function check($value) {
+        $result = new ValidationResult();
+
+        foreach ($this->getConstraints() as $constraint) {
+            if ( ! $constraint->check($value)) {
+                $result->addError(
+                    new ValidationError($this->getName(), $value, $constraint)
+                );
+            }
+        }
+
+        return $result;
+    }
 }

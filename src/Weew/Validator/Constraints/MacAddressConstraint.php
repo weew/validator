@@ -6,13 +6,13 @@ use Weew\Validator\IConstraint;
 
 class MacAddressConstraint implements IConstraint {
     /**
-     * @param $string
+     * @param $value
      *
      * @return bool
      */
-    public function check($string) {
-        if (is_string($string)) {
-            return filter_var($string, FILTER_VALIDATE_MAC) !== false;
+    public function check($value) {
+        if (is_string($value)) {
+            return filter_var($value, FILTER_VALIDATE_MAC) !== false;
         }
 
         return false;

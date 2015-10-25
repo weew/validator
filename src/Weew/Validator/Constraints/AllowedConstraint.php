@@ -25,12 +25,12 @@ class AllowedConstraint implements IConstraint {
     }
 
     /**
-     * @param $abstract
+     * @param $value
      *
      * @return bool
      */
-    public function check($abstract) {
-        return in_array($abstract, $this->validValues, true);
+    public function check($value) {
+        return in_array($value, $this->validValues, true);
     }
 
     /**

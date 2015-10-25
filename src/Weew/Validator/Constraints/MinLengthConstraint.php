@@ -21,13 +21,13 @@ class MinLengthConstraint implements IConstraint {
     }
 
     /**
-     * @param $string
+     * @param $value
      *
      * @return bool
      */
-    public function check($string) {
-        if (is_string($string)) {
-            return strlen($string) >= $this->min;
+    public function check($value) {
+        if (is_string($value)) {
+            return strlen($value) >= $this->min;
         }
 
         return false;
