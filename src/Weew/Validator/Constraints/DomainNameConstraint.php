@@ -22,14 +22,15 @@ use Weew\Validator\IConstraint;
  */
 class DomainNameConstraint implements IConstraint {
     /**
-     * @param $abstract
+     * @param $value
      *
      * @return bool
      */
-    public function check($abstract) {
-        if (is_string($abstract) && strlen($abstract) <= 253) {
-            return 1 === preg_match('/^(?!\-)(?:[a-zA-Z\d\-]{0,62}[a-zA-Z\d]\.){1,126}(?!\d+)[a-zA-Z\d]{1,63}$/', $abstract);
+    public function check($value) {
+        if (is_string($value) && strlen($value) <= 253) {
+            return 1 === preg_match('/^(?!\-)(?:[a-zA-Z\d\-]{0,62}[a-zA-Z\d]\.){1,126}(?!\d+)[a-zA-Z\d]{1,63}$/', $value);
         }
+
         return false;
     }
 
