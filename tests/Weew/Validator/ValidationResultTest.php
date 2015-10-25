@@ -51,4 +51,24 @@ class ValidationResultTest extends PHPUnit_Framework_TestCase {
         $result->addError($error);
         $this->assertTrue($result->isFailed());
     }
+
+    public function test_extend() {
+        $r1 = new ValidationResult();
+        $r2 = new ValidationResult();
+        $r3 = new ValidationResult();
+
+        $e1 = new ValidationError('foo', 'bar', new StringConstraint());
+        $e2 = new ValidationError('bar', 'foo', new StringConstraint());
+        $e3 = new ValidationError('baz', 'bar', new StringConstraint());
+
+        $r1->addErrors([$e1, $e2]);
+        $r2->addError($e2);
+        $r3->addError($e3);
+
+        $this->assertEquals([$e1, $e2], $r1->getErrors());
+        $r1->extend($r2);
+        $this->assertEquals([$e1, $e2, $e2], $r1->getErrors());
+        $r1->extend($r3);
+        $this->assertEquals([$e1, $e2, $e2, $e3], $r1->getErrors());
+    }
 }

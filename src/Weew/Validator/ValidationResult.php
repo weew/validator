@@ -51,4 +51,11 @@ class ValidationResult implements IValidationResult {
     public function errorCount() {
         return count($this->getErrors());
     }
+
+    /**
+     * @param IValidationResult $result
+     */
+    public function extend(IValidationResult $result) {
+        $this->addErrors($result->getErrors());
+    }
 }
