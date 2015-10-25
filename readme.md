@@ -220,6 +220,6 @@ $validator->check(new User('foo'));
 
 - Use one commit for each constraint.
 - Each constraint file must have a short description.
-- Each constraint must be added to the index in the readme, together with a description
+- Each constraint must be added to the list of available constraints and linked accordingly.
 - Constraints must have a code coverage of 100%.
 - Use separate branches or forks to create pull requests.
