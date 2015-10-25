@@ -1,13 +1,11 @@
 <?php
 
-
-namespace Weew\Validator\Constraints;
-
+namespace Tests\Weew\Validator\Constraints;
 
 use PHPUnit_Framework_TestCase;
+use Weew\Validator\Constraints\DomainNameConstraint;
 
 class DomainNameConstraintTest extends PHPUnit_Framework_TestCase{
-
     public function test_check() {
         $c = new DomainNameConstraint();
         $this->assertFalse($c->check(1));
@@ -26,5 +24,4 @@ class DomainNameConstraintTest extends PHPUnit_Framework_TestCase{
         $c = new DomainNameConstraint();
         $this->assertEquals([], $c->toArray());
     }
-
 }
