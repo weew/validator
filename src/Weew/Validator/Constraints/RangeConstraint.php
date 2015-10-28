@@ -1,6 +1,9 @@
 <?php
+
 namespace Weew\Validator\Constraints;
+
 use Weew\Validator\IConstraint;
+
 /**
  * Check if the value is inside the given range.
  */
@@ -9,10 +12,12 @@ class RangeConstraint implements IConstraint {
      * @var int
      */
     private $min;
+
     /**
      * @var int
      */
     private $max;
+
     /**
      * @param $min
      * @param $max
@@ -21,14 +26,20 @@ class RangeConstraint implements IConstraint {
         $this->min = $min;
         $this->max = $max;
     }
+
     /**
      * @param $value
      *
      * @return bool
      */
     public function check($value) {
-        return $value >= $this->min && $value <= $this->max;
+        if(is_numeric($value)){
+            return $value >= $this->min && $value <= $this->max;
+        }
+
+        return false;
     }
+
     /**
      * @return array
      */
