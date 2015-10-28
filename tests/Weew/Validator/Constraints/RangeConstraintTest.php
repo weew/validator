@@ -13,6 +13,8 @@ class RangeConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($c->check(10));
         $this->assertFalse($c->check('10'));
         $this->assertFalse($c->check('010'));
+        $this->assertTrue($c->check('a'));
+
         $this->assertTrue($c->check(5));
         $this->assertTrue($c->check('5'));
     }
