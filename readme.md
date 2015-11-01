@@ -1,9 +1,11 @@
 # PHP Validator
 
-[![Build Status](https://travis-ci.org/weew/php-validator.svg?branch=master)](https://travis-ci.org/weew/php-validator)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/weew/php-validator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/weew/php-validator/?branch=master)
-[![Coverage Status](https://coveralls.io/repos/weew/php-validator/badge.svg?branch=master&service=github)](https://coveralls.io/github/weew/php-validator?branch=master)
-[![License](https://poser.pugx.org/weew/php-validator/license)](https://packagist.org/packages/weew/php-validator)
+[![Build Status](https://img.shields.io/travis/weew/php-validator.svg)](https://travis-ci.org/weew/php-validator)
+[![Code Quality](https://img.shields.io/scrutinizer/g/weew/php-validator.svg)](https://scrutinizer-ci.com/g/weew/php-validator)
+[![Test Coverage](https://img.shields.io/coveralls/weew/php-validator.svg)](https://coveralls.io/github/weew/php-validator)
+[![Dependencies](https://img.shields.io/versioneye/d/php/weew:php-validator.svg)](https://versioneye.com/php/weew:php-validator)
+[![Version](https://img.shields.io/packagist/v/weew/php-validator.svg)](https://packagist.org/packages/weew/php-validator)
+[![Licence](https://img.shields.io/packagist/l/weew/php-validator.svg)](https://packagist.org/packages/weew/php-validator)
 
 ## Table of contents
 
