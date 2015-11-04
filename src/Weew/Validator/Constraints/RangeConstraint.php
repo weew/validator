@@ -11,12 +11,12 @@ class RangeConstraint implements IConstraint {
     /**
      * @var int
      */
-    private $min;
+    protected $min;
 
     /**
      * @var int
      */
-    private $max;
+    protected $max;
 
     /**
      * @param $min
