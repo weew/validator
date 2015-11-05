@@ -46,6 +46,7 @@
 - [MaxLength](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/MaxLengthConstraint.php)
 - [MinLength](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/MinLengthConstraint.php)
 - [Numeric](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/NumericConstraint.php)
+- [Range](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/RangeConstraint.php)
 - [Regex](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/RegexConstraint.php)
 - [String](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/StringConstraint.php)
 - [Url](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/UrlConstraint.php)
