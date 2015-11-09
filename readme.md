@@ -46,6 +46,7 @@
 - [MacAddress](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/MacAddressConstraint.php)
 - [MaxLength](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/MaxLengthConstraint.php)
 - [MinLength](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/MinLengthConstraint.php)
+- [NotNull](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/NotNullConstraint.php)
 - [Null](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/NullConstraint.php)
 - [Numeric](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/NumericConstraint.php)
 - [Range](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/RangeConstraint.php)
