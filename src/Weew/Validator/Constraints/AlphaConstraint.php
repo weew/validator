@@ -6,9 +6,6 @@ use Weew\Validator\IConstraint;
 
 /**
  * Check if the value consists of alphabetical characters.
- * A character is considered as alphabetical if its a letter from current locale
- * Default is a-z A-Z
- * http://php.net/manual/en/function.setlocale.php
  */
 class AlphaConstraint implements IConstraint {
     /**
@@ -17,7 +14,11 @@ class AlphaConstraint implements IConstraint {
      * @return bool
      */
     public function check($value) {
-        return ctype_alpha($value);
+        if (is_string($value)) {
+            return preg_match('/[[:alpha:]]/u', $value) === 1;
+        }
+
+        return false;
     }
 
     /**
