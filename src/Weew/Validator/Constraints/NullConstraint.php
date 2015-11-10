@@ -5,7 +5,7 @@ namespace Weew\Validator\Constraints;
 use Weew\Validator\IConstraint;
 
 /**
- * Check if the value is exactly null
+ * Check if the value is exactly null.
  */
 class NullConstraint implements IConstraint {
     /**
