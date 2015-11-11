@@ -10,11 +10,11 @@ class NotNullConstraintTest extends PHPUnit_Framework_TestCase {
         $c = new NotNullConstraint();
         $this->assertFalse($c->check(null));
 
-        $this->assertTrue($c->check(""));
+        $this->assertTrue($c->check(''));
         $this->assertTrue($c->check(0));
         $this->assertTrue($c->check(10));
-        $this->assertTrue($c->check("0"));
-        $this->assertTrue($c->check("null"));
+        $this->assertTrue($c->check('0'));
+        $this->assertTrue($c->check('null'));
     }
 
     public function test_to_array() {

@@ -9,14 +9,14 @@ class AlphaConstraintTest extends PHPUnit_Framework_TestCase {
     public function test_check() {
         $c = new AlphaConstraint();
         $this->assertFalse($c->check(1));
-        $this->assertFalse($c->check(""));
-        $this->assertFalse($c->check(" "));
-        $this->assertFalse($c->check("-"));
+        $this->assertFalse($c->check(''));
+        $this->assertFalse($c->check(' '));
+        $this->assertFalse($c->check('-'));
         $this->assertFalse($c->check('1'));
         $this->assertFalse($c->check('foo2bar'));
 
-        $this->assertTrue($c->check("a"));
-        $this->assertTrue($c->check("A"));
+        $this->assertTrue($c->check('a'));
+        $this->assertTrue($c->check('A'));
     }
 
     public function test_to_array() {
