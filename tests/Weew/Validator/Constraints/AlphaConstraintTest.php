@@ -12,6 +12,8 @@ class AlphaConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($c->check(""));
         $this->assertFalse($c->check(" "));
         $this->assertFalse($c->check("-"));
+        $this->assertFalse($c->check('1'));
+        $this->assertFalse($c->check('foo2bar'));
 
         $this->assertTrue($c->check("a"));
         $this->assertTrue($c->check("A"));
