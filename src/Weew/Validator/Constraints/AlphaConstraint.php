@@ -15,7 +15,7 @@ class AlphaConstraint implements IConstraint {
      */
     public function check($value) {
         if (is_string($value)) {
-            return preg_match('/^[[:alpha:]]$/u', $value) === 1;
+            return preg_match('/^[[:alpha:]]+$/u', $value) === 1;
         }
 
         return false;
