@@ -2,7 +2,7 @@
 
 namespace Weew\Validator;
 
-use Weew\Foundation\Interfaces\IArrayable;
+use Weew\Contracts\IArrayable;
 
 interface IConstraint extends IArrayable {
     /**
