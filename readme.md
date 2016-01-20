@@ -33,6 +33,7 @@
 - [Accepted](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/AcceptedConstraint.php)
 - [Allowed](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/AllowedConstraint.php)
 - [Alpha](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/AlphaConstraint.php)
+- [AlphaNumeric](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/AlphaNumericConstraint.php)
 - [DomainName](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/DomainNameConstraint.php)
 - [Email](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/EmailConstraint.php)
 - [Equals](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/EqualsConstraint.php)
