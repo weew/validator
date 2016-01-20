@@ -11,6 +11,7 @@
 
 - [Installation](#installation)
 - [Available constraints](#available-constraints)
+- [Additional constraint packs](#additional-constraint-packs)
 - [Constraints](#constraints)
 - [Constraint groups](#constraint-groups)
 - [Validator](#validator)
@@ -54,6 +55,12 @@
 - [Regex](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/RegexConstraint.php)
 - [String](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/StringConstraint.php)
 - [Url](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/UrlConstraint.php)
+
+## Additional constraint packs
+
+There are additional constraints that you may load trough composer.
+
+- [weew/php-validator-doctrine-constraints](https://github.com/weew/php-validator-doctrine-constraints)
 
 ## Constraints
 
