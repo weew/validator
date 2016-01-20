@@ -11,7 +11,7 @@ class MinLengthConstraint implements IConstraint {
     /**
      * @var int
      */
-    private $min;
+    protected $min;
 
     /**
      * @param $min

@@ -11,7 +11,7 @@ class EqualsConstraint implements IConstraint {
     /**
      * @var mixed
      */
-    private $value;
+    protected $value;
 
     /**
      * @param $value

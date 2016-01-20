@@ -11,7 +11,7 @@ class RegexConstraint implements IConstraint {
     /**
      * @var string
      */
-    private $pattern;
+    protected $pattern;
 
     /**
      * @param $pattern

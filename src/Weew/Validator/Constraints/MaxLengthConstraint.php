@@ -11,7 +11,7 @@ class MaxLengthConstraint implements IConstraint {
     /**
      * @var int
      */
-    private $max;
+    protected $max;
 
     /**
      * @param $max
