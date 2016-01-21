@@ -12,8 +12,16 @@ class IPv6ConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('2001:0db8:0000:0042:0000:8a2e:0370:7334'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new IPv6Constraint();
-        $this->assertEquals([], $c->toArray());
+        $this->assertEquals([], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new IPv6Constraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new IPv6Constraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

@@ -15,8 +15,16 @@ class MinLengthConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('12345'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new MinLengthConstraint(10);
-        $this->assertEquals(['min' => 10], $c->toArray());
+        $this->assertEquals(['min' => 10], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new MinLengthConstraint(10, 'foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new MinLengthConstraint(10);
+        $this->assertNotNull($c->getMessage());
     }
 }

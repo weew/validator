@@ -14,10 +14,14 @@ class PassingConstraint implements IConstraint {
         return true;;
     }
 
+    public function getMessage() {
+        return 'passing';
+    }
+
     /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return ['bar' => 'foo'];
     }
 }

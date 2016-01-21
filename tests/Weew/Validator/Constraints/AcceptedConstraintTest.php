@@ -19,10 +19,18 @@ class AcceptedConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check(true));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new AcceptedConstraint();
         $this->assertEquals([
             'valid_values' => ['yes', 'on', '1', 'true', 1, true],
-        ], $c->toArray());
+        ], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new AcceptedConstraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new AcceptedConstraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

@@ -6,6 +6,20 @@ use Weew\Validator\IConstraint;
 
 class MacAddressConstraint implements IConstraint {
     /**
+     * @var string
+     */
+    protected $message;
+
+    /**
+     * MacAddressConstraint constructor.
+     *
+     * @param string $message
+     */
+    public function __construct($message = null) {
+        $this->message = $message;
+    }
+
+    /**
      * @param $value
      *
      * @return bool
@@ -19,9 +33,20 @@ class MacAddressConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return 'Must be a MAC address.';
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [];
     }
 }

@@ -9,6 +9,20 @@ use Weew\Validator\IConstraint;
  */
 class NullConstraint implements IConstraint {
     /**
+     * @var string
+     */
+    protected $message;
+
+    /**
+     * NullConstraint constructor.
+     *
+     * @param string $message
+     */
+    public function __construct($message = null) {
+        $this->message = $message;
+    }
+
+    /**
      * @param $value
      *
      * @return bool
@@ -18,9 +32,20 @@ class NullConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return 'Must be null.';
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [];
     }
 }

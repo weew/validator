@@ -19,12 +19,21 @@ class RangeConstraint implements IConstraint {
     protected $max;
 
     /**
+     * @var string
+     */
+    protected $message;
+
+    /**
+     * RangeConstraint constructor.
+     *
      * @param $min
      * @param $max
+     * @param string $message
      */
-    public function __construct($min, $max) {
+    public function __construct($min, $max, $message = null) {
         $this->min = $min;
         $this->max = $max;
+        $this->message = $message;
     }
 
     /**
@@ -41,9 +50,23 @@ class RangeConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return s(
+            'Must have a value between "%s" and "%s".',
+            $this->min, $this->max
+        );
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [
             'min' => $this->min,
             'max' => $this->max

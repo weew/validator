@@ -14,10 +14,19 @@ class LengthConstraint implements IConstraint {
     protected $length;
 
     /**
-     * @param $length
+     * @var string
      */
-    public function __construct($length) {
+    protected $message;
+
+    /**
+     * LengthConstraint constructor.
+     *
+     * @param $length
+     * @param string $message
+     */
+    public function __construct($length, $message = null) {
         $this->length = $length;
+        $this->message = $message;
     }
 
     /**
@@ -34,9 +43,20 @@ class LengthConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return s('Must have a length of "%s" characters.', $this->length);
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [
             'length' => $this->length,
         ];

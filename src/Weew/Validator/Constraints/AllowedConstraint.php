@@ -14,14 +14,17 @@ class AllowedConstraint implements IConstraint {
     protected $validValues;
 
     /**
-     * @param $values
+     * @var string
      */
-    public function __construct($values) {
-        if ( ! is_array($values)) {
-            $values = func_get_args();
-        }
+    protected $message;
 
+    /**
+     * @param array $values
+     * @param string $message
+     */
+    public function __construct(array $values, $message = null) {
         $this->validValues = $values;
+        $this->message = $message;
     }
 
     /**
@@ -34,11 +37,22 @@ class AllowedConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return 'Is not allowed.';
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [
-            'valid_values' => $this->validValues,
+            'allowed_values' => $this->validValues,
         ];
     }
 }

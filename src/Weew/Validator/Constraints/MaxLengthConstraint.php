@@ -14,10 +14,19 @@ class MaxLengthConstraint implements IConstraint {
     protected $max;
 
     /**
-     * @param $max
+     * @var string
      */
-    public function __construct($max) {
+    protected $message;
+
+    /**
+     * MaxLengthConstraint constructor.
+     *
+     * @param $max
+     * @param string $message
+     */
+    public function __construct($max, $message = null) {
         $this->max = $max;
+        $this->message = $message;
     }
 
     /**
@@ -34,9 +43,20 @@ class MaxLengthConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return s('Must not be longer then "%s" characters.', $this->max);
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [
             'max' => $this->max
         ];

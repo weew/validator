@@ -19,8 +19,16 @@ class RangeConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('5'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new RangeConstraint(2, 5);
-        $this->assertEquals(['min' => 2, 'max' => 5], $c->toArray());
+        $this->assertEquals(['min' => 2, 'max' => 5], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new RangeConstraint(10, 20, 'foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new RangeConstraint(10, 20);
+        $this->assertNotNull($c->getMessage());
     }
 }

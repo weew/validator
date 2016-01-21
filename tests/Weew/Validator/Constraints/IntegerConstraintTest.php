@@ -15,8 +15,16 @@ class IntegerConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check(123));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new IntegerConstraint();
-        $this->assertEquals([], $c->toArray());
+        $this->assertEquals([], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new IntegerConstraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new IntegerConstraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

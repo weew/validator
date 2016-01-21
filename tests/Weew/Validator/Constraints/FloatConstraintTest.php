@@ -14,8 +14,16 @@ class FloatConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check(1.2));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new FloatConstraint();
-        $this->assertEquals([], $c->toArray());
+        $this->assertEquals([], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new FloatConstraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new FloatConstraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

@@ -15,8 +15,16 @@ class MaxLengthConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('12'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new MaxLengthConstraint(10);
-        $this->assertEquals(['max' => 10], $c->toArray());
+        $this->assertEquals(['max' => 10], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new MaxLengthConstraint(10, 'foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new MaxLengthConstraint(10);
+        $this->assertNotNull($c->getMessage());
     }
 }

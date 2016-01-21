@@ -14,10 +14,14 @@ class FailingConstraint implements IConstraint {
         return false;
     }
 
+    public function getMessage() {
+        return 'failing';
+    }
+
     /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return ['foo' => 'bar'];
     }
 }

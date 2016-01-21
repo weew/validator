@@ -14,10 +14,19 @@ class EqualsConstraint implements IConstraint {
     protected $value;
 
     /**
-     * @param $value
+     * @var
      */
-    public function __construct($value) {
+    protected $message;
+
+    /**
+     * EqualsConstraint constructor.
+     *
+     * @param $value
+     * @param string $message
+     */
+    public function __construct($value, $message = null) {
         $this->value = $value;
+        $this->message = $message;
     }
 
     /**
@@ -30,9 +39,20 @@ class EqualsConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return s('Must be equal to "%s".', $this->value);
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [
             'value' => $this->value,
         ];

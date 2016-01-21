@@ -14,8 +14,16 @@ class MacAddressConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('01:23:45:67:89:ab'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new MacAddressConstraint();
-        $this->assertEquals([], $c->toArray());
+        $this->assertEquals([], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new MacAddressConstraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new MacAddressConstraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

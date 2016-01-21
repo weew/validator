@@ -14,10 +14,19 @@ class MinLengthConstraint implements IConstraint {
     protected $min;
 
     /**
-     * @param $min
+     * @var string
      */
-    public function __construct($min) {
+    protected $message;
+
+    /**
+     * MinLengthConstraint constructor.
+     *
+     * @param $min
+     * @param string $message
+     */
+    public function __construct($min, $message = null) {
         $this->min = $min;
+        $this->message = $message;
     }
 
     /**
@@ -34,9 +43,20 @@ class MinLengthConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return s('Must not be shorter then "%s" characters.', $this->min);
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [
             'min' => $this->min,
         ];

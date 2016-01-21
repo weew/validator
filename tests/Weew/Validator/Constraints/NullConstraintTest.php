@@ -16,8 +16,16 @@ class NullConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check(null));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new NullConstraint();
-        $this->assertEquals([], $c->toArray());
+        $this->assertEquals([], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new NullConstraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new NullConstraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

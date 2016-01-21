@@ -17,8 +17,16 @@ class NumericConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('1.2'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new NumericConstraint();
-        $this->assertEquals([], $c->toArray());
+        $this->assertEquals([], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new NumericConstraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new NumericConstraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

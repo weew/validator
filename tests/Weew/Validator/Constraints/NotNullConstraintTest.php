@@ -17,8 +17,16 @@ class NotNullConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('null'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new NotNullConstraint();
-        $this->assertEquals([], $c->toArray());
+        $this->assertEquals([], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new NotNullConstraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new NotNullConstraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

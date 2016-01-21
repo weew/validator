@@ -15,8 +15,16 @@ class LengthRangeConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('1234'));
         $this->assertTrue($c->check('12345'));
     }
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new LengthRangeConstraint(10, 20);
-        $this->assertEquals(['min' => 10, 'max' => 20], $c->toArray());
+        $this->assertEquals(['min' => 10, 'max' => 20], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new LengthRangeConstraint(10, 20, 'foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new LengthRangeConstraint(10, 20);
+        $this->assertNotNull($c->getMessage());
     }
 }

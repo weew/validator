@@ -9,6 +9,20 @@ use Weew\Validator\IConstraint;
  */
 class IPv6Constraint implements IConstraint {
     /**
+     * @var string
+     */
+    protected $message;
+
+    /**
+     * IPv6Constraint constructor.
+     *
+     * @param string $message
+     */
+    public function __construct($message = null) {
+        $this->message = $message;
+    }
+
+    /**
      * @param $value
      *
      * @return bool
@@ -18,9 +32,20 @@ class IPv6Constraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return 'Must be an IPv6 address.';
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [];
     }
 }

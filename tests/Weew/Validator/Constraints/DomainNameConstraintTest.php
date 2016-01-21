@@ -20,8 +20,16 @@ class DomainNameConstraintTest extends PHPUnit_Framework_TestCase{
         $this->assertFalse($c->check('according.to.wikipedia.a.domain.name.must.not.exceed.a.length.of.about.twohundretandfiftyfivecharacters.otherwise.it.will.be.not.a.valid.domain.name.however.i.could.never.find.this.in.any.rfc.linked.from.the.article.however.i.implemented.it.nonetheless.com'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new DomainNameConstraint();
-        $this->assertEquals([], $c->toArray());
+        $this->assertEquals([], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new DomainNameConstraint('foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new DomainNameConstraint();
+        $this->assertNotNull($c->getMessage());
     }
 }

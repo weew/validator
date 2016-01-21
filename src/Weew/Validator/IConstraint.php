@@ -2,13 +2,21 @@
 
 namespace Weew\Validator;
 
-use Weew\Contracts\IArrayable;
-
-interface IConstraint extends IArrayable {
+interface IConstraint {
     /**
      * @param $value
      *
      * @return bool
      */
     function check($value);
+
+    /**
+     * @return string
+     */
+    function getMessage();
+
+    /**
+     * @return array
+     */
+    function getOptions();
 }

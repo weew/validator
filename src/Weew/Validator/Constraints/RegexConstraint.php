@@ -14,10 +14,19 @@ class RegexConstraint implements IConstraint {
     protected $pattern;
 
     /**
-     * @param $pattern
+     * @var string
      */
-    public function __construct($pattern) {
+    protected $message;
+
+    /**
+     * RegexConstraint constructor.
+     *
+     * @param $pattern
+     * @param string $message
+     */
+    public function __construct($pattern, $message = null) {
         $this->pattern = $pattern;
+        $this->message = $message;
     }
 
     /**
@@ -34,9 +43,20 @@ class RegexConstraint implements IConstraint {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return s('Must match regex pattern "%s".', $this->pattern);
+    }
+
+    /**
      * @return array
      */
-    public function toArray() {
+    public function getOptions() {
         return [
             'pattern' => $this->pattern,
         ];

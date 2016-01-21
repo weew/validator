@@ -13,8 +13,16 @@ class EqualsConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($c->check('true'));
     }
 
-    public function test_to_array() {
+    public function test_get_options() {
         $c = new EqualsConstraint('foo');
-        $this->assertEquals(['value' => 'foo'], $c->toArray());
+        $this->assertEquals(['value' => 'foo'], $c->getOptions());
+    }
+
+    public function test_get_message() {
+        $c = new EqualsConstraint('yolo', 'foo');
+        $this->assertEquals('foo', $c->getMessage());
+
+        $c = new EqualsConstraint('yolo');
+        $this->assertNotNull($c->getMessage());
     }
 }
