@@ -2,7 +2,9 @@
 
 namespace Weew\Validator;
 
-interface IValidationResult {
+use Weew\Contracts\IArrayable;
+
+interface IValidationResult extends IArrayable {
     /**
      * @param IValidationError $error
      */

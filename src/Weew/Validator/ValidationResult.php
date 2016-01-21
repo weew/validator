@@ -58,4 +58,17 @@ class ValidationResult implements IValidationResult {
     public function extend(IValidationResult $result) {
         $this->addErrors($result->getErrors());
     }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $errors = [];
+
+        foreach ($this->getErrors() as $error) {
+            $errors[$error->getSubject()] = $error->getMessage();
+        }
+
+        return $errors;
+    }
 }

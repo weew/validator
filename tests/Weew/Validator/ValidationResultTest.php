@@ -3,6 +3,7 @@
 namespace Tests\Weew\Validator;
 
 use PHPUnit_Framework_TestCase;
+use Weew\Validator\Constraints\IntegerConstraint;
 use Weew\Validator\Constraints\StringConstraint;
 use Weew\Validator\ValidationError;
 use Weew\Validator\ValidationResult;
@@ -70,5 +71,20 @@ class ValidationResultTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals([$e1, $e2, $e2], $r1->getErrors());
         $r1->extend($r3);
         $this->assertEquals([$e1, $e2, $e2, $e3], $r1->getErrors());
+    }
+
+    public function test_to_array() {
+        $result = new ValidationResult();
+        $result->addErrors([
+            new ValidationError('foo', '', new StringConstraint()),
+            new ValidationError('bar', '', new IntegerConstraint()),
+        ]);
+
+        $this->assertEquals(
+            [
+                'foo' => (new StringConstraint())->getMessage(),
+                'bar' => (new IntegerConstraint())->getMessage(),
+            ], $result->toArray()
+        );
     }
 }

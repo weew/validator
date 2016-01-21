@@ -13,7 +13,7 @@ class ValidationErrorTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('foo', $error->getSubject());
         $this->assertEquals('bar', $error->getValue());
-        $this->assertEquals('Must be a string.', $error->getMessage());
+        $this->assertEquals($error->getConstraint()->getMessage(), $error->getMessage());
         $this->assertTrue($error->getConstraint() === $c);
     }
 }
