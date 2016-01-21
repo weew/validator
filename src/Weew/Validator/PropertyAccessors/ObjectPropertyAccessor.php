@@ -2,6 +2,8 @@
 
 namespace Weew\Validator\PropertyAccessors;
 
+use ReflectionObject;
+use ReflectionProperty;
 use Weew\Validator\IPropertyAccessor;
 
 class ObjectPropertyAccessor implements IPropertyAccessor {
@@ -12,7 +14,18 @@ class ObjectPropertyAccessor implements IPropertyAccessor {
      * @return bool
      */
     public function supports($abstract, $property) {
-        return is_object($abstract) && property_exists($abstract, $property);
+
+        if (is_object($abstract)) {
+            $classReflector = new ReflectionObject($abstract);
+
+            if ($classReflector->hasProperty($property)) {
+                $propertyReflector = new ReflectionProperty($abstract, $property);
+
+                return $propertyReflector->isPublic();
+            }
+        }
+
+        return false;
     }
 
     /**

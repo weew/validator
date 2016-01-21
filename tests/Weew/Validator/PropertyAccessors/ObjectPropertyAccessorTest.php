@@ -4,6 +4,7 @@ namespace Tests\Weew\Validator\PropertyAccessors;
 
 use PHPUnit_Framework_TestCase;
 use stdClass;
+use Tests\Weew\Validator\PropertyAccessors\Mocks\TestObject;
 use Weew\Validator\PropertyAccessors\ObjectPropertyAccessor;
 
 class ObjectPropertyAccessorTest extends PHPUnit_Framework_TestCase {
@@ -28,5 +29,13 @@ class ObjectPropertyAccessorTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('bar', $accessor->getProperty($object, 'foo'));
         $this->assertEquals('foo', $accessor->getProperty($object, 'bar'));
+    }
+
+    public function test_get_protected_property() {
+        $accessor = new ObjectPropertyAccessor();
+        $object = new TestObject();
+
+        $this->assertTrue($accessor->supports($object, 'bar'));
+        $this->assertFalse($accessor->supports($object, 'foo'));
     }
 }

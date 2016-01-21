@@ -3,6 +3,9 @@
 namespace Tests\Weew\Validator\PropertyAccessors\Mocks;
 
 class TestObject {
+    protected $foo;
+    public $bar;
+
     public function getFoo() {
         return 'foo';
     }
