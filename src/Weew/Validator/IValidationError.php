@@ -14,6 +14,11 @@ interface IValidationError {
     function getValue();
 
     /**
+     * @return string
+     */
+    function getMessage();
+
+    /**
      * @return IConstraint
      */
     function getConstraint();

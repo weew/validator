@@ -44,6 +44,13 @@ class ValidationError implements IValidationError {
     }
 
     /**
+     * @return string
+     */
+    public function getMessage() {
+       return $this->getConstraint()->getMessage();
+    }
+
+    /**
      * @return IConstraint
      */
     public function getConstraint() {

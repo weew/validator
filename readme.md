@@ -68,12 +68,14 @@ Constraints are small pieces of validation logic. A constraint can be used on it
 
 ```php
 $constraint = new EmailConstraint();
+// or
+$constraint = new EmailConstraint('Custom error message.');
 $check = $constraint->check('foo@bar.baz');
 
 if ($check) {
     // valdiation passed
 } else {
-    // validation failed
+    echo $constraint->getMessage();
 }
 ```
 
@@ -120,6 +122,7 @@ if ($result->isFailed()) {
     foreach ($result->getErrors() as $error) {
         // $error->getSubject()
         // $error->getValue()
+        // $error->getMessage()
         // $error->getConstraint()
     }
 }
@@ -168,10 +171,12 @@ Creating a new constraint is a fairly easy task. All you have to do is to implem
 class RangeConstraint implements IConstraint {
     protected $min;
     protected $max;
+    protected $message;
 
-    public function __construct($min, $max) {
+    public function __construct($min, $max, $message = null) {
         $this->min = $min;
         $this->max = $max;
+        $this->message = $message;
     }
 
     public function check($value) {
@@ -182,7 +187,15 @@ class RangeConstraint implements IConstraint {
         return false;
     }
 
-    public function toArray() {
+    public function getMessage() {
+        if ($this->message !== null) {
+            return $this->message;
+        }
+
+        return 'Some default error message.';
+    }
+
+    public function getOptions() {
         return [
             'min' => $this->min,
             'max' => $this->max,
