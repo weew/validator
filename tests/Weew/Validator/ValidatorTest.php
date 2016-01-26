@@ -4,13 +4,16 @@ namespace Tests\Weew\Validator;
 
 use Exception;
 use PHPUnit_Framework_TestCase;
+use Tests\Weew\Validator\Mocks\AdvancedConstraint;
 use Tests\Weew\Validator\Mocks\CustomValidator;
 use Tests\Weew\Validator\Mocks\FailingConstraint;
+use Tests\Weew\Validator\Mocks\FakeValidationDataWrapperException;
 use Tests\Weew\Validator\Mocks\PassingConstraint;
 use Weew\Validator\ConstraintGroup;
 use Weew\Validator\Constraints\EmailConstraint;
 use Weew\Validator\Constraints\StringConstraint;
 use Weew\Validator\IPropertyReader;
+use Weew\Validator\IValidationData;
 use Weew\Validator\IValidationResult;
 use Weew\Validator\PropertyReader;
 use Weew\Validator\Validator;
@@ -125,5 +128,20 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
     public function test_validator_calls_configure_method() {
         $this->setExpectedException(Exception::class, 'foo bar baz');
         new CustomValidator();
+    }
+
+    public function test_validator_passes_over_validation_data() {
+        $validator = new Validator();
+        $validator->addConstraint('foo', new AdvancedConstraint());
+        $data = null;
+
+        try {
+            $validator->check(['foo' => 'bar']);
+        } catch (FakeValidationDataWrapperException $ex) {
+            $data = $ex->getData();
+        }
+
+        $this->assertTrue($data instanceof IValidationData);
+        $this->assertEquals('bar', $data->get('foo'));
     }
 }

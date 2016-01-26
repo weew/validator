@@ -3,6 +3,7 @@
 namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
+use Weew\Validator\IValidationData;
 
 /**
  * Considers domains as valid according to the following requirements:
@@ -37,10 +38,11 @@ class DomainNameConstraint implements IConstraint {
 
     /**
      * @param $value
+     * @param IValidationData $data
      *
      * @return bool
      */
-    public function check($value) {
+    public function check($value, IValidationData $data = null) {
         if (is_string($value) && strlen($value) <= 253) {
             return 1 === preg_match('/^(?!\-)(?:[a-zA-Z\d\-]{0,62}[a-zA-Z\d]\.){1,126}(?!\d+)[a-zA-Z\d]{1,63}$/', $value);
         }

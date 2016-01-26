@@ -3,6 +3,7 @@
 namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
+use Weew\Validator\IValidationData;
 
 class AlphaNumericConstraint implements IConstraint {
     /**
@@ -21,10 +22,11 @@ class AlphaNumericConstraint implements IConstraint {
 
     /**
      * @param $value
+     * @param IValidationData $data
      *
      * @return bool
      */
-    public function check($value) {
+    public function check($value, IValidationData $data = null) {
         if (is_scalar($value)) {
             return preg_match('/^[[:alnum:]]+$/u', $value) === 1;
         }

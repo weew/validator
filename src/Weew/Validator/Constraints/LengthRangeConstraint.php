@@ -3,6 +3,7 @@
 namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
+use Weew\Validator\IValidationData;
 
 /**
  * Check if the value's length is in the given range.
@@ -38,10 +39,11 @@ class LengthRangeConstraint implements IConstraint {
 
     /**
      * @param $value
+     * @param IValidationData $data
      *
      * @return bool
      */
-    public function check($value) {
+    public function check($value, IValidationData $data = null) {
         if (is_string($value)) {
             $length = strlen($value);
 

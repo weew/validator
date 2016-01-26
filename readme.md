@@ -179,7 +179,7 @@ class RangeConstraint implements IConstraint {
         $this->message = $message;
     }
 
-    public function check($value) {
+    public function check($value, IValidationData $data = null) {
         if (is_numeric($value)) {
             return $value >= $this->min && $value <= $this->max;
         }

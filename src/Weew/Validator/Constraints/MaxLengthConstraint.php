@@ -3,6 +3,7 @@
 namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
+use Weew\Validator\IValidationData;
 
 /**
  * Check if the value has the given max length.
@@ -31,10 +32,11 @@ class MaxLengthConstraint implements IConstraint {
 
     /**
      * @param $value
+     * @param IValidationData $data
      *
      * @return bool
      */
-    public function check($value) {
+    public function check($value, IValidationData $data = null) {
         if (is_string($value)) {
             return strlen($value) <= $this->max;
         }

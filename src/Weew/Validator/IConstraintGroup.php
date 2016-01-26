@@ -40,8 +40,9 @@ interface IConstraintGroup {
 
     /**
      * @param $value
+     * @param IValidationData $data
      *
      * @return IValidationResult
      */
-    function check($value);
+    function check($value, IValidationData $data = null);
 }

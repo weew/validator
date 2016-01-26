@@ -3,6 +3,7 @@
 namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
+use Weew\Validator\IValidationData;
 
 /**
  * Checks if the value is a valid URL
@@ -27,10 +28,11 @@ class UrlConstraint implements IConstraint {
      * the end of the string will result in a failure.
      *
      * @param $value
+     * @param IValidationData $data
      *
      * @return bool
      */
-    public function check($value) {
+    public function check($value, IValidationData $data = null) {
         if (is_string($value)) {
             return filter_var($value, FILTER_VALIDATE_URL) !== false;
         }

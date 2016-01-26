@@ -127,11 +127,11 @@ class Validator implements IValidator {
      */
     protected function applyConstraints($data, array $groups) {
         $result = new ValidationResult();
+        $data = $this->createValidationData($data);
 
         foreach ($groups as $group) {
-            $value = $this->getPropertyReader()
-                ->getProperty($data, $group->getName());
-            $groupResult = $group->check($value);
+            $value = $data->get($group->getName());
+            $groupResult = $group->check($value, $data);
 
             if ($groupResult->isFailed()) {
                 $result->extend($groupResult);
@@ -146,5 +146,14 @@ class Validator implements IValidator {
      */
     protected function createPropertyReader() {
         return new PropertyReader();
+    }
+
+    /**
+     * @param $data
+     *
+     * @return IValidationData
+     */
+    protected function createValidationData($data) {
+        return new ValidationData($this->getPropertyReader(), $data);
     }
 }

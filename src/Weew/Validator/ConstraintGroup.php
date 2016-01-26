@@ -76,14 +76,15 @@ class ConstraintGroup implements IConstraintGroup {
 
     /**
      * @param $value
+     * @param IValidationData $data
      *
      * @return ValidationResult
      */
-    public function check($value) {
+    public function check($value, IValidationData $data = null) {
         $result = new ValidationResult();
 
         foreach ($this->getConstraints() as $constraint) {
-            if ( ! $constraint->check($value)) {
+            if ( ! $constraint->check($value, $data)) {
                 $result->addError(
                     new ValidationError($this->getName(), $value, $constraint)
                 );

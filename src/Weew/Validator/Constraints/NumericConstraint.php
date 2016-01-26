@@ -3,6 +3,7 @@
 namespace Weew\Validator\Constraints;
 
 use Weew\Validator\IConstraint;
+use Weew\Validator\IValidationData;
 
 /**
  * Check if the value is numeric (123 or '123').
@@ -24,10 +25,11 @@ class NumericConstraint implements IConstraint {
 
     /**
      * @param $value
+     * @param IValidationData $data
      *
      * @return bool
      */
-    public function check($value) {
+    public function check($value, IValidationData $data = null) {
         return is_numeric($value);
     }
 
