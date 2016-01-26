@@ -154,6 +154,6 @@ class Validator implements IValidator {
      * @return IValidationData
      */
     protected function createValidationData($data) {
-        return new ValidationData($this->getPropertyReader(), $data);
+        return new ValidationData($data, $this->getPropertyReader());
     }
 }

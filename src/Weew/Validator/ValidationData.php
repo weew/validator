@@ -16,12 +16,16 @@ class ValidationData implements IValidationData {
     /**
      * ValidationData constructor.
      *
-     * @param IPropertyReader $propertyReader
      * @param $data
+     * @param IPropertyReader $propertyReader
      */
-    public function __construct(IPropertyReader $propertyReader, $data) {
-        $this->propertyReader = $propertyReader;
+    public function __construct($data, IPropertyReader $propertyReader = null) {
+        if ( ! $propertyReader instanceof IPropertyReader) {
+            $propertyReader = $this->createPropertyReader();
+        }
+
         $this->data = $data;
+        $this->propertyReader = $propertyReader;
     }
 
     /**
@@ -38,5 +42,12 @@ class ValidationData implements IValidationData {
         }
 
         return $value;
+    }
+
+    /**
+     * @return IPropertyReader
+     */
+    protected function createPropertyReader() {
+        return new PropertyReader();
     }
 }
