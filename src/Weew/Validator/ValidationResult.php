@@ -66,7 +66,11 @@ class ValidationResult implements IValidationResult {
         $errors = [];
 
         foreach ($this->getErrors() as $error) {
-            $errors[$error->getSubject()] = $error->getMessage();
+            if ( ! array_has($errors, $error->getSubject())) {
+                $errors[$error->getSubject()] = [];
+            }
+
+            $errors[$error->getSubject()][] = $error->getMessage();
         }
 
         return $errors;

@@ -82,8 +82,25 @@ class ValidationResultTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals(
             [
-                'foo' => (new StringConstraint())->getMessage(),
-                'bar' => (new IntegerConstraint())->getMessage(),
+                'foo' => [(new StringConstraint())->getMessage()],
+                'bar' => [(new IntegerConstraint())->getMessage()],
+            ], $result->toArray()
+        );
+    }
+
+    public function test_to_array_multiple() {
+        $result = new ValidationResult();
+        $result->addErrors([
+            new ValidationError('foo', '', new StringConstraint()),
+            new ValidationError('foo', '', new IntegerConstraint()),
+        ]);
+
+        $this->assertEquals(
+            [
+                'foo' => [
+                    (new StringConstraint())->getMessage(),
+                    (new IntegerConstraint())->getMessage()
+                ],
             ], $result->toArray()
         );
     }
