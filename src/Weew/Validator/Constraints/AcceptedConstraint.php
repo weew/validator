@@ -35,7 +35,7 @@ class AcceptedConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        return in_array($value, $this->validValues, true);
+        return array_contains($this->validValues, $value);
     }
 
     /**
