@@ -1,11 +1,10 @@
 # PHP Validator
 
-[![Build Status](https://img.shields.io/travis/weew/php-validator.svg)](https://travis-ci.org/weew/php-validator)
-[![Code Quality](https://img.shields.io/scrutinizer/g/weew/php-validator.svg)](https://scrutinizer-ci.com/g/weew/php-validator)
-[![Test Coverage](https://img.shields.io/coveralls/weew/php-validator.svg)](https://coveralls.io/github/weew/php-validator)
-[![Dependencies](https://img.shields.io/versioneye/d/php/weew:php-validator.svg)](https://versioneye.com/php/weew:php-validator)
-[![Version](https://img.shields.io/packagist/v/weew/php-validator.svg)](https://packagist.org/packages/weew/php-validator)
-[![Licence](https://img.shields.io/packagist/l/weew/php-validator.svg)](https://packagist.org/packages/weew/php-validator)
+[![Build Status](https://img.shields.io/travis/weew/validator.svg)](https://travis-ci.org/weew/validator)
+[![Code Quality](https://img.shields.io/scrutinizer/g/weew/validator.svg)](https://scrutinizer-ci.com/g/weew/validator)
+[![Test Coverage](https://img.shields.io/coveralls/weew/validator.svg)](https://coveralls.io/github/weew/validator)
+[![Version](https://img.shields.io/packagist/v/weew/validator.svg)](https://packagist.org/packages/weew/validator)
+[![Licence](https://img.shields.io/packagist/l/weew/validator.svg)](https://packagist.org/packages/weew/validator)
 
 ## Table of contents
 
@@ -27,40 +26,40 @@
 
 ## Installation
 
-`composer require weew/php-validator`
+`composer require weew/validator`
 
 ## Available constraints
 
-- [Accepted](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/AcceptedConstraint.php)
-- [Allowed](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/AllowedConstraint.php)
-- [Alpha](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/AlphaConstraint.php)
-- [AlphaNumeric](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/AlphaNumericConstraint.php)
-- [DomainName](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/DomainNameConstraint.php)
-- [Email](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/EmailConstraint.php)
-- [Equals](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/EqualsConstraint.php)
-- [Float](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/FloatConstraint.php)
-- [Integer](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/IntegerConstraint.php)
-- [IP](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/IPConstraint.php)
-- [IPv4](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/IPv4Constraint.php)
-- [IPv6](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/IPv6Constraint.php)
-- [Length](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/LengthConstraint.php)
-- [LengthRange](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/LengthRangeConstraint.php)
-- [MacAddress](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/MacAddressConstraint.php)
-- [MaxLength](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/MaxLengthConstraint.php)
-- [MinLength](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/MinLengthConstraint.php)
-- [NotNull](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/NotNullConstraint.php)
-- [Null](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/NullConstraint.php)
-- [Numeric](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/NumericConstraint.php)
-- [Range](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/RangeConstraint.php)
-- [Regex](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/RegexConstraint.php)
-- [String](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/StringConstraint.php)
-- [Url](https://github.com/weew/php-validator/blob/master/src/Weew/Validator/Constraints/UrlConstraint.php)
+- [Accepted](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AcceptedConstraint.php)
+- [Allowed](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AllowedConstraint.php)
+- [Alpha](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AlphaConstraint.php)
+- [AlphaNumeric](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AlphaNumericConstraint.php)
+- [DomainName](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/DomainNameConstraint.php)
+- [Email](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/EmailConstraint.php)
+- [Equals](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/EqualsConstraint.php)
+- [Float](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/FloatConstraint.php)
+- [Integer](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/IntegerConstraint.php)
+- [IP](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/IPConstraint.php)
+- [IPv4](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/IPv4Constraint.php)
+- [IPv6](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/IPv6Constraint.php)
+- [Length](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/LengthConstraint.php)
+- [LengthRange](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/LengthRangeConstraint.php)
+- [MacAddress](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MacAddressConstraint.php)
+- [MaxLength](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MaxLengthConstraint.php)
+- [MinLength](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MinLengthConstraint.php)
+- [NotNull](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NotNullConstraint.php)
+- [Null](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NullConstraint.php)
+- [Numeric](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NumericConstraint.php)
+- [Range](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/RangeConstraint.php)
+- [Regex](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/RegexConstraint.php)
+- [String](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/StringConstraint.php)
+- [Url](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/UrlConstraint.php)
 
 ## Additional constraint packs
 
 There are additional constraints that you may load trough composer.
 
-- [weew/php-validator-doctrine-constraints](https://github.com/weew/php-validator-doctrine-constraints)
+- [weew/validator-doctrine-constraints](https://github.com/weew/validator-doctrine-constraints)
 
 ## Constraints
 
