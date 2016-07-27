@@ -4,10 +4,10 @@ namespace Weew\Validator;
 
 interface IPropertyReader {
     /**
-     * @param $source
-     * @param $propertyName
+     * @param mixed $source
+     * @param string $propertyName
      *
-     * @return mixed|null
+     * @return mixed
      */
     function getProperty($source, $propertyName);
 

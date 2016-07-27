@@ -5,12 +5,14 @@ namespace Tests\Weew\Validator;
 use Exception;
 use PHPUnit_Framework_TestCase;
 use Tests\Weew\Validator\Mocks\AdvancedConstraint;
+use Tests\Weew\Validator\Mocks\ArrayableDict;
 use Tests\Weew\Validator\Mocks\CustomValidator;
 use Tests\Weew\Validator\Mocks\FailingConstraint;
 use Tests\Weew\Validator\Mocks\FakeValidationDataWrapperException;
 use Tests\Weew\Validator\Mocks\PassingConstraint;
 use Weew\Validator\ConstraintGroup;
 use Weew\Validator\Constraints\EmailConstraint;
+use Weew\Validator\Constraints\NotNullConstraint;
 use Weew\Validator\Constraints\StringConstraint;
 use Weew\Validator\IPropertyReader;
 use Weew\Validator\IValidationData;
@@ -142,6 +144,26 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         }
 
         $this->assertTrue($data instanceof IValidationData);
-        $this->assertEquals('bar', $data->get('foo'));
+        $this->assertEquals(['foo' => 'bar'], $data->get('foo'));
+    }
+
+    public function test_validator_validates_recursively() {
+        $validator = new Validator();
+        $validator->addConstraint('foo.*.bar', new NotNullConstraint());
+        $data = null;
+
+        $result = $validator->check([
+            'foo' => new ArrayableDict([
+                ['bar' => null],
+                ['bar' => 1],
+                ['bar' => null]
+            ]),
+            'bar' => null,
+            'yolo' => 'swag',
+        ]);
+
+        $this->assertEquals(2, $result->errorCount());
+        $this->assertEquals('foo.0.bar', $result->getErrors()[0]->getSubject());
+        $this->assertEquals('foo.2.bar', $result->getErrors()[1]->getSubject());
     }
 }

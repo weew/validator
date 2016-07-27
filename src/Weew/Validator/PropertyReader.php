@@ -24,10 +24,10 @@ class PropertyReader implements IPropertyReader {
     }
 
     /**
-     * @param $source
-     * @param $propertyName
+     * @param mixed $source
+     * @param string $propertyName
      *
-     * @return mixed|null
+     * @return mixed
      */
     public function getProperty($source, $propertyName) {
         foreach ($this->getPropertyAccessors() as $accessor) {

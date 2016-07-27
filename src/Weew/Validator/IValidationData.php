@@ -4,8 +4,9 @@ namespace Weew\Validator;
 
 interface IValidationData {
     /**
-     * @param $key
-     * @param null $defaultValue
+     * @param string $key
+     *
+     * @return array
      */
-    function get($key, $defaultValue = null);
+    function get($key);
 }

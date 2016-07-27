@@ -130,11 +130,15 @@ class Validator implements IValidator {
         $data = $this->createValidationData($data);
 
         foreach ($groups as $group) {
-            $value = $data->get($group->getName());
-            $groupResult = $group->check($value, $data);
+            $values = $data->get($group->getName());
 
-            if ($groupResult->isFailed()) {
-                $result->extend($groupResult);
+            foreach ($values as $name => $value) {
+                $group->setName($name);
+                $groupResult = $group->check($value, $data);
+
+                if ($groupResult->isFailed()) {
+                    $result->extend($groupResult);
+                }
             }
         }
 

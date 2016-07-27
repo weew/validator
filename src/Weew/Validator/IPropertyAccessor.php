@@ -4,16 +4,16 @@ namespace Weew\Validator;
 
 interface IPropertyAccessor {
     /**
-     * @param $abstract
-     * @param $property
+     * @param mixed $abstract
+     * @param string $property
      *
      * @return bool
      */
     function supports($abstract, $property);
 
     /**
-     * @param $abstract
-     * @param $property
+     * @param mixed $abstract
+     * @param string $property
      *
      * @return mixed
      */

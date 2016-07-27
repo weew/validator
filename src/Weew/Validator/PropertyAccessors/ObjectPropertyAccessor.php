@@ -8,13 +8,12 @@ use Weew\Validator\IPropertyAccessor;
 
 class ObjectPropertyAccessor implements IPropertyAccessor {
     /**
-     * @param $abstract
-     * @param $property
+     * @param mixed $abstract
+     * @param string $property
      *
      * @return bool
      */
     public function supports($abstract, $property) {
-
         if (is_object($abstract)) {
             $classReflector = new ReflectionObject($abstract);
 
@@ -29,8 +28,8 @@ class ObjectPropertyAccessor implements IPropertyAccessor {
     }
 
     /**
-     * @param $abstract
-     * @param $property
+     * @param mixed $abstract
+     * @param string $property
      *
      * @return mixed
      */

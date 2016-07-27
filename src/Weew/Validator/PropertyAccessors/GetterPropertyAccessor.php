@@ -6,8 +6,8 @@ use Weew\Validator\IPropertyAccessor;
 
 class GetterPropertyAccessor implements IPropertyAccessor {
     /**
-     * @param $abstract
-     * @param $property
+     * @param mixed $abstract
+     * @param string $property
      *
      * @return bool
      */
@@ -22,8 +22,8 @@ class GetterPropertyAccessor implements IPropertyAccessor {
     }
 
     /**
-     * @param $abstract
-     * @param $property
+     * @param mixed $abstract
+     * @param string $property
      *
      * @return mixed
      */
@@ -34,7 +34,7 @@ class GetterPropertyAccessor implements IPropertyAccessor {
     }
 
     /**
-     * @param $property
+     * @param string $property
      *
      * @return string
      */
