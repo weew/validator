@@ -55,10 +55,12 @@ class ValidationData implements IValidationData {
             return [];
         }
 
-        if ($key === '*') {
-            $values = $this->getValuesForWildcardKey($data, $keys);
+        if ($key === ValidationToken::WILDCARD_VALUES) {
+            $values = $this->getWildcardValues($data, $keys);
+        } else if ($key === ValidationToken::WILDCARD_KEYS) {
+            $values = $this->getWildcardKeys($data, $keys);
         } else {
-            $values = $this->getValuesForRegularKey($data, $key, $keys);
+            $values = $this->getRegularValues($data, $key, $keys);
         }
 
         return $values;
@@ -70,7 +72,33 @@ class ValidationData implements IValidationData {
      *
      * @return array
      */
-    protected function getValuesForWildcardKey($data, array $keys) {
+    protected function getWildcardKeys($data, array $keys) {
+        $values = [];
+
+        if ( ! is_array($data) && ! $data instanceof Traversable) {
+            if ($data instanceof IArrayable) {
+                $data = $data->toArray();
+            }
+
+            if ( ! is_array($data)) {
+                $data = [];
+            }
+        }
+
+        foreach ($data as $itemKey => $itemValue) {
+            $values[$itemKey] = $itemKey;
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param mixed $data
+     * @param array $keys
+     *
+     * @return array
+     */
+    protected function getWildcardValues($data, array $keys) {
         $values = [];
 
         if ( ! is_array($data) && ! $data instanceof Traversable) {
@@ -92,7 +120,7 @@ class ValidationData implements IValidationData {
         if (count($keys) > 0) {
             foreach ($data as $itemKey => $itemValue) {
                 $nestedValues = $this->getValues($itemValue, $keys);
-                $isLastWildcard = ! array_contains($keys, '*');
+                $isLastWildcard = ! array_contains($keys, ValidationToken::WILDCARD_VALUES);
 
                 foreach ($nestedValues as $nestedKey => $nestedValue) {
                     // do no collect null values unless it is the last wildcard node
@@ -113,7 +141,7 @@ class ValidationData implements IValidationData {
      *
      * @return array
      */
-    protected function getValuesForRegularKey($data, $key, array $keys) {
+    protected function getRegularValues($data, $key, array $keys) {
         $values = [];
 
         if (count($keys) === 0) {

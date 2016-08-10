@@ -18,6 +18,7 @@
 - [Composing a custom validator](#composing-a-custom-validator)
 - [Creating a custom validator class](#creating-a-custom-validator-class)
 - [Custom constraints](#custom-constraints)
+- [Wildcard validation](#wildcard-validation)
 - [Property accessors](#property-accessors)
     - [Array accessor](#array-accessor)
     - [Object accessor](#object-accessor)
@@ -202,6 +203,44 @@ class RangeConstraint implements IConstraint {
     }
 }
 ```
+
+## Wildcard validation
+
+Imagine you have a similar structure that you want to validate.
+
+```php
+$input = [
+    'items' => [
+        ['name' => 'name1'],
+        ['name' => null],
+        ['name' => 'name3'],
+    ],
+];
+```
+
+In order to validate the `name` property of every single element inside the `items` array, you would have to iterate over the items manually. You could also use a wildcard to target all the values. To wildcard array values, you can use this special character `*`.
+
+```php
+$result = $validator->addConstraint('items.*.name', new NotNullConstraint());
+```
+
+In the example above, result will hold an error with subject `items.1.name`.
+
+Array keys can also be validated using wildcards. You'll have to use a different wildcard character `#`. Be aware that the `#` wildcard character should always be the last path segment. This is wrong `foo.#.bar`, this is ok `foo.bar.#`.
+
+```php
+$input = [
+    'items' => [
+        'name1' => 'value1',
+        '2' => 'value2',
+        'name3' => 'value3',
+    ],
+];
+
+$result = $validator->addConstraint('items.#', new LengthRangeConstraint(3, 5));
+```
+
+Result will contain an error with subject `items.1`.
 
 ## Property accessors
 

@@ -5,7 +5,6 @@ namespace Tests\Weew\Validator;
 use Exception;
 use PHPUnit_Framework_TestCase;
 use Tests\Weew\Validator\Mocks\AdvancedConstraint;
-use Tests\Weew\Validator\Mocks\ArrayableDict;
 use Tests\Weew\Validator\Mocks\CustomValidator;
 use Tests\Weew\Validator\Mocks\FailingConstraint;
 use Tests\Weew\Validator\Mocks\FakeValidationDataWrapperException;
@@ -153,11 +152,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         $data = null;
 
         $result = $validator->check([
-            'foo' => new ArrayableDict([
+            'foo' => [
                 ['bar' => null],
                 ['bar' => 1],
                 ['bar' => null]
-            ]),
+            ],
             'bar' => null,
             'yolo' => 'swag',
         ]);

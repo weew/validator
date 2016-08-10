@@ -3,6 +3,7 @@
 namespace Tests\Weew\Validator;
 
 use PHPUnit_Framework_TestCase;
+use Tests\Weew\Validator\Mocks\ArrayableDict;
 use Weew\Validator\ValidationData;
 
 class ValidationDataTest extends PHPUnit_Framework_TestCase {
@@ -20,7 +21,7 @@ class ValidationDataTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(['foo.yolo' => null], $data->get('foo.yolo'));
     }
 
-    public function test_get_with_wildcard() {
+    public function test_get_wildcard_values() {
         $data = new ValidationData([
             'foo' => [
                 'bar' => [
@@ -96,5 +97,66 @@ class ValidationDataTest extends PHPUnit_Framework_TestCase {
             'yolo.swag.yolo.baz' => 5,
             'yolo.swag.0.baz' => 6,
         ], $data->get('*.*.*.baz'));
+    }
+
+    public function test_get_wildcard_keys() {
+        $data = new ValidationData([
+            'foo' => [
+                'bar' => [
+                    ['baz' => 1],
+                    ['baz' => 2],
+                    ['baz' => 3],
+                ]
+            ],
+            'yolo' => [
+                'bar' => 4,
+                ['baz' => 5],
+                'swag' => [
+                    'yolo' => ['baz' => 5],
+                    ['baz' => 6],
+                ],
+            ]
+        ]);
+
+        $this->assertEquals([
+            'foo.bar' => 'bar',
+        ], $data->get('foo.#'));
+
+        $this->assertEquals([
+            'foo.bar' => 'bar',
+        ], $data->get('foo.#.0'));
+
+        $this->assertEquals([
+            'foo.bar' => 'bar',
+            'yolo.bar' => 'bar',
+            'yolo.0' => 0,
+            'yolo.swag' => 'swag',
+        ], $data->get('*.#'));
+    }
+
+    public function test_get_from_non_arrays() {
+        $data = new ValidationData([
+            'foo' => new ArrayableDict([
+                ['bar' => null],
+                ['bar' => 1],
+                ['bar' => null]
+            ]),
+            'bar' => null,
+            'yolo' => 'swag',
+        ]);
+
+        $this->assertEquals([
+            'foo.0.bar' => null,
+            'foo.1.bar' => 1,
+            'foo.2.bar' => null,
+        ], $data->get('foo.*.bar'));
+
+        $this->assertEquals([
+            'foo.0' => '0',
+            'foo.1' => '1',
+            'foo.2' => '2',
+        ], $data->get('foo.#'));
+
+        $this->assertEquals([], $data->get('foo.bar.#'));
     }
 }
