@@ -12,7 +12,7 @@ class AcceptedConstraint implements IConstraint {
     /**
      * @var array
      */
-    protected $validValues = ['yes', 'on', '1', 'true', 1, true];
+    protected $accepted = ['yes', 'on', '1', 'true', 1, true];
 
     /**
      * @var string
@@ -35,7 +35,7 @@ class AcceptedConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        return array_contains($this->validValues, $value);
+        return array_contains($this->accepted, $value);
     }
 
     /**
@@ -54,7 +54,7 @@ class AcceptedConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'valid_values' => $this->validValues,
+            'accepted' => $this->accepted,
         ];
     }
 }

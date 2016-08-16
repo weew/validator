@@ -6,13 +6,13 @@ use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
 /**
- * Check if the value has the given min length.
+ * Check if the value is not greater then given.
  */
-class MinLengthConstraint implements IConstraint {
+class MaxConstraint implements IConstraint {
     /**
      * @var int
      */
-    protected $min;
+    protected $max;
 
     /**
      * @var string
@@ -20,13 +20,13 @@ class MinLengthConstraint implements IConstraint {
     protected $message;
 
     /**
-     * MinLengthConstraint constructor.
+     * MaxConstraint constructor.
      *
-     * @param $min
+     * @param int $max
      * @param string $message
      */
-    public function __construct($min, $message = null) {
-        $this->min = $min;
+    public function __construct($max, $message = null) {
+        $this->max = $max;
         $this->message = $message;
     }
 
@@ -37,10 +37,8 @@ class MinLengthConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        if (is_string($value)) {
-            return strlen($value) >= $this->min;
-        } else if (is_array($value)) {
-            return count($value) >= $this->min;
+        if (is_numeric($value)) {
+            return $value <= $this->max;
         }
 
         return false;
@@ -54,7 +52,9 @@ class MinLengthConstraint implements IConstraint {
             return $this->message;
         }
 
-        return s('Must not be shorter then "%s".', $this->min);
+        return s(
+            'Must not be greater than "%s".', $this->max
+        );
     }
 
     /**
@@ -62,7 +62,7 @@ class MinLengthConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'min' => $this->min,
+            'max' => $this->max,
         ];
     }
 }

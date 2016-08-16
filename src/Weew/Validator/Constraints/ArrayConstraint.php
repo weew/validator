@@ -5,25 +5,21 @@ namespace Weew\Validator\Constraints;
 use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
-class MinValueConstraint implements IConstraint {
-    /**
-     * @var int
-     */
-    protected $min;
-
+/**
+ * Check if the value is an array.
+ */
+class ArrayConstraint implements IConstraint {
     /**
      * @var string
      */
     protected $message;
 
     /**
-     * MinValueConstraint constructor.
+     * ArrayConstraint constructor.
      *
-     * @param int $min
      * @param string $message
      */
-    public function __construct($min, $message = null) {
-        $this->min = $min;
+    public function __construct($message = null) {
         $this->message = $message;
     }
 
@@ -34,11 +30,7 @@ class MinValueConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        if (is_numeric($value)) {
-            return $value >= $this->min;
-        }
-
-        return false;
+        return is_array($value);
     }
 
     /**
@@ -49,17 +41,13 @@ class MinValueConstraint implements IConstraint {
             return $this->message;
         }
 
-        return s(
-            'Must not be smaller than "%s".', $this->min
-        );
+        return 'Must be an array.';
     }
 
     /**
      * @return array
      */
     public function getOptions() {
-        return [
-            'min' => $this->min,
-        ];
+        return [];
     }
 }

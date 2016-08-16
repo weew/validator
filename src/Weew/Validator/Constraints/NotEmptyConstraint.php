@@ -5,23 +5,21 @@ namespace Weew\Validator\Constraints;
 use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
-class NotAllowedValuesConstraint implements IConstraint {
-    /**
-     * @var array
-     */
-    protected $notAllowedValues;
-
+/**
+ * Check if the value is not "empty" (not null, 0, false, '', or []).
+ */
+class NotEmptyConstraint implements IConstraint {
     /**
      * @var string
      */
     protected $message;
 
     /**
-     * @param array $values
+     * NotEmptyConstraint constructor.
+     *
      * @param string $message
      */
-    public function __construct(array $values, $message = null) {
-        $this->notAllowedValues = $values;
+    public function __construct($message = null) {
         $this->message = $message;
     }
 
@@ -32,7 +30,11 @@ class NotAllowedValuesConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        return ! array_contains($this->notAllowedValues, $value);
+        if (is_string($value)) {
+            $value = trim($value);
+        }
+
+        return ! empty($value);
     }
 
     /**
@@ -43,18 +45,13 @@ class NotAllowedValuesConstraint implements IConstraint {
             return $this->message;
         }
 
-        return s(
-            'Is not allowed, forbidden values are "%s".',
-            implode(', ', $this->notAllowedValues)
-        );
+        return 'Must not be empty.';
     }
 
     /**
      * @return array
      */
     public function getOptions() {
-        return [
-            'not_allowed_values' => $this->notAllowedValues,
-        ];
+        return [];
     }
 }

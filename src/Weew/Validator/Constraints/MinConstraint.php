@@ -6,18 +6,13 @@ use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
 /**
- * Check if the value's length is in the given range.
+ * Check if the value is not less then given.
  */
-class LengthRangeConstraint implements IConstraint {
+class MinConstraint implements IConstraint {
     /**
      * @var int
      */
     protected $min;
-
-    /**
-     * @var int
-     */
-    protected $max;
 
     /**
      * @var string
@@ -25,15 +20,13 @@ class LengthRangeConstraint implements IConstraint {
     protected $message;
 
     /**
-     * LengthRangeConstraint constructor.
+     * MinConstraint constructor.
      *
-     * @param $min
-     * @param $max
+     * @param int $min
      * @param string $message
      */
-    public function __construct($min, $max, $message = null) {
+    public function __construct($min, $message = null) {
         $this->min = $min;
-        $this->max = $max;
         $this->message = $message;
     }
 
@@ -44,10 +37,8 @@ class LengthRangeConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        if (is_string($value)) {
-            $length = strlen($value);
-
-            return $length >= $this->min && $length <= $this->max;
+        if (is_numeric($value)) {
+            return $value >= $this->min;
         }
 
         return false;
@@ -62,8 +53,7 @@ class LengthRangeConstraint implements IConstraint {
         }
 
         return s(
-            'Must be between "%s" and "%s" characters long.',
-            $this->min, $this->max
+            'Must not be smaller than "%s".', $this->min
         );
     }
 
@@ -73,7 +63,6 @@ class LengthRangeConstraint implements IConstraint {
     public function getOptions() {
         return [
             'min' => $this->min,
-            'max' => $this->max,
         ];
     }
 }

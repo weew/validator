@@ -22,7 +22,7 @@ class AcceptedConstraintTest extends PHPUnit_Framework_TestCase {
     public function test_get_options() {
         $c = new AcceptedConstraint();
         $this->assertEquals([
-            'valid_values' => ['yes', 'on', '1', 'true', 1, true],
+            'accepted' => ['yes', 'on', '1', 'true', 1, true],
         ], $c->getOptions());
     }
 

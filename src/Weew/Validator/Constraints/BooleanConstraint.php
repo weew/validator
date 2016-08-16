@@ -6,27 +6,20 @@ use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
 /**
- * Check if the value has the given min length.
+ * Check if the value is a boolean.
  */
-class MinLengthConstraint implements IConstraint {
-    /**
-     * @var int
-     */
-    protected $min;
-
+class BooleanConstraint implements IConstraint {
     /**
      * @var string
      */
     protected $message;
 
     /**
-     * MinLengthConstraint constructor.
+     * BooleanConstraint constructor.
      *
-     * @param $min
      * @param string $message
      */
-    public function __construct($min, $message = null) {
-        $this->min = $min;
+    public function __construct($message = null) {
         $this->message = $message;
     }
 
@@ -37,13 +30,7 @@ class MinLengthConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        if (is_string($value)) {
-            return strlen($value) >= $this->min;
-        } else if (is_array($value)) {
-            return count($value) >= $this->min;
-        }
-
-        return false;
+        return is_bool($value);
     }
 
     /**
@@ -54,15 +41,13 @@ class MinLengthConstraint implements IConstraint {
             return $this->message;
         }
 
-        return s('Must not be shorter then "%s".', $this->min);
+        return 'Must be a boolean.';
     }
 
     /**
      * @return array
      */
     public function getOptions() {
-        return [
-            'min' => $this->min,
-        ];
+        return [];
     }
 }

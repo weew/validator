@@ -5,11 +5,14 @@ namespace Weew\Validator\Constraints;
 use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
-class MaxValueConstraint implements IConstraint {
+/**
+ * Check that elements within an array are not forbidden.
+ */
+class ForbiddenSubsetConstraint implements IConstraint {
     /**
-     * @var int
+     * @var array
      */
-    protected $max;
+    protected $forbidden;
 
     /**
      * @var string
@@ -17,13 +20,11 @@ class MaxValueConstraint implements IConstraint {
     protected $message;
 
     /**
-     * MaxValueConstraint constructor.
-     *
-     * @param int $max
+     * @param array $forbidden
      * @param string $message
      */
-    public function __construct($max, $message = null) {
-        $this->max = $max;
+    public function __construct(array $forbidden, $message = null) {
+        $this->forbidden = $forbidden;
         $this->message = $message;
     }
 
@@ -34,8 +35,14 @@ class MaxValueConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        if (is_numeric($value)) {
-            return $value <= $this->max;
+        if (is_array($value)) {
+            foreach ($value as $item) {
+                if (array_contains($this->forbidden, $item)) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         return false;
@@ -50,7 +57,8 @@ class MaxValueConstraint implements IConstraint {
         }
 
         return s(
-            'Must not be greater than "%s".', $this->max
+            'Contains not allowed values, forbidden values are "%s".',
+            implode(', ', $this->forbidden)
         );
     }
 
@@ -59,7 +67,7 @@ class MaxValueConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'max' => $this->max,
+            'forbidden' => $this->forbidden,
         ];
     }
 }

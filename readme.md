@@ -32,30 +32,36 @@
 ## Available constraints
 
 - [Accepted](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AcceptedConstraint.php)
+- [Allowed](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AllowedConstraint.php)
+- [AllowedSubset](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AllowedSubsetConstraint.php)
 - [Alpha](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AlphaConstraint.php)
 - [AlphaNumeric](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AlphaNumericConstraint.php)
+- [Array](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/ArrayConstraint.php)
+- [Boolean](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/BooleanConstraint.php)
 - [DomainName](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/DomainNameConstraint.php)
 - [Email](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/EmailConstraint.php)
 - [Equals](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/EqualsConstraint.php)
 - [Float](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/FloatConstraint.php)
+- [Forbidden](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/ForbiddenConstraint.php)
+- [ForbiddenSubset](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/ForbiddenSubsetConstraint.php)
 - [Integer](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/IntegerConstraint.php)
 - [IP](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/IPConstraint.php)
 - [IPv4](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/IPv4Constraint.php)
 - [IPv6](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/IPv6Constraint.php)
 - [Length](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/LengthConstraint.php)
-- [LengthRange](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/LengthRangeConstraint.php)
-- [MacAddress](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MacAddressConstraint.php)
+- [MaxAddress](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MaxAddressConstraint.php)
+- [Max](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MaxConstraint.php)
 - [MaxLength](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MaxLengthConstraint.php)
+- [Min](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MinConstraint.php)
 - [MinLength](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MinLengthConstraint.php)
+- [MinMax](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MinMaxConstraint.php)
+- [MinMaxLength](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MinMaxLengthConstraint.php)
+- [NotEmpty](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NotEmptyConstraint.php)
 - [NotNull](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NotNullConstraint.php)
 - [Null](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NullConstraint.php)
 - [Numeric](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NumericConstraint.php)
-- [Allowed Values](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AllowedValuesConstraint.php)
-- [Not Allowed Values](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NotAllowedValuesConstraint.php)
-- [Value Range](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/ValueRangeConstraint.php)
-- [Min Value](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MinValueConstraint.php)
-- [Max Value](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MaxValueConstraint.php)
 - [Regex](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/RegexConstraint.php)
+- [Scalar](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/ScalarConstraint.php)
 - [String](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/StringConstraint.php)
 - [Url](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/UrlConstraint.php)
 
@@ -140,7 +146,7 @@ $data = ['username' => 'foo', 'email' => 'foo@bar.baz'];
 $validator->addConstraint('email', new EmailConstraint());
 $validator->addConstraints('username', [
     new AlphaConstraint(),
-    new LengthRangeConstraint(3, 20),
+    new MinMaxLengthConstraint(3, 20),
 ]);
 
 $result = $validator->check($data);
@@ -156,7 +162,7 @@ class UserProfileValidator extends Validator {
         $this->addConstraint('email', new EmailConstraint());
         $this->addConstraints('username', [
             new AlphaConstraint(),
-            new LengthRangeConstraint(3, 20),
+            new MinMaxLengthConstraint(3, 20),
         ]);
     }
 }
@@ -171,7 +177,7 @@ $result = $validator->check($data);
 Creating a new constraint is a fairly easy task. All you have to do is to implement the ```IConstraint``` interface. This is an example on how to create a simple constraint that makes sure that a number is within the given range.
 
 ```php
-class ValueRangeConstraint implements IConstraint {
+class MinMaxConstraint implements IConstraint {
     protected $min;
     protected $max;
     protected $message;
@@ -240,7 +246,7 @@ $input = [
     ],
 ];
 
-$result = $validator->addConstraint('items.#', new LengthRangeConstraint(3, 5));
+$result = $validator->addConstraint('items.#', new MinMaxLengthConstraint(3, 5));
 ```
 
 Result will contain an error with subject `items.1`.
@@ -285,11 +291,3 @@ class User {
 
 $validator->check(new User('foo'));
 ```
-
-## Contributing constraints
-
-- Use one commit for each constraint.
-- Each constraint file must have a short description.
-- Each constraint must be added to the list of available constraints and linked accordingly.
-- Constraints must have a code coverage of 100%.
-- Use separate branches or forks to create pull requests.

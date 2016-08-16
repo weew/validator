@@ -5,6 +5,9 @@ namespace Weew\Validator\Constraints;
 use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
+/**
+ * Check if the value consists of alphabetical or numerical characters.
+ */
 class AlphaNumericConstraint implements IConstraint {
     /**
      * @var string

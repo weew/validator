@@ -10,9 +10,11 @@ class MinLengthConstraintTest extends PHPUnit_Framework_TestCase {
         $c = new MinLengthConstraint(3);
         $this->assertFalse($c->check(1));
         $this->assertFalse($c->check('12'));
+        $this->assertFalse($c->check([1, 2]));
         $this->assertTrue($c->check('123'));
         $this->assertTrue($c->check('1234'));
         $this->assertTrue($c->check('12345'));
+        $this->assertTrue($c->check([1, 2, 3]));
     }
 
     public function test_get_options() {

@@ -11,8 +11,11 @@ class MaxLengthConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($c->check(1));
         $this->assertFalse($c->check('1234'));
         $this->assertFalse($c->check('12345'));
+        $this->assertFalse($c->check([1, 2, 3, 4]));
         $this->assertTrue($c->check('123'));
         $this->assertTrue($c->check('12'));
+        $this->assertTrue($c->check([1, 2, 3]));
+        $this->assertTrue($c->check([1, 2]));
     }
 
     public function test_get_options() {

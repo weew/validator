@@ -12,7 +12,7 @@ class EqualsConstraint implements IConstraint {
     /**
      * @var mixed
      */
-    protected $value;
+    protected $expected;
 
     /**
      * @var
@@ -22,11 +22,11 @@ class EqualsConstraint implements IConstraint {
     /**
      * EqualsConstraint constructor.
      *
-     * @param $value
+     * @param $expected
      * @param string $message
      */
-    public function __construct($value, $message = null) {
-        $this->value = $value;
+    public function __construct($expected, $message = null) {
+        $this->expected = $expected;
         $this->message = $message;
     }
 
@@ -37,7 +37,7 @@ class EqualsConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        return $value === $this->value;
+        return $value === $this->expected;
     }
 
     /**
@@ -48,7 +48,7 @@ class EqualsConstraint implements IConstraint {
             return $this->message;
         }
 
-        return s('Must be equal to "%s".', $this->value);
+        return s('Must be equal to "%s".', $this->expected);
     }
 
     /**
@@ -56,7 +56,7 @@ class EqualsConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'value' => $this->value,
+            'expected' => $this->expected,
         ];
     }
 }

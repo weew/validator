@@ -5,6 +5,9 @@ namespace Weew\Validator\Constraints;
 use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
+/**
+ * Check if the value is a mac address.
+ */
 class MacAddressConstraint implements IConstraint {
     /**
      * @var string

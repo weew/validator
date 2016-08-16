@@ -39,6 +39,8 @@ class LengthConstraint implements IConstraint {
     public function check($value, IValidationData $data = null) {
         if (is_string($value)) {
             return strlen($value) === $this->length;
+        } else if (is_array($value)) {
+            return count($value) === $this->length;
         }
 
         return false;
@@ -52,7 +54,7 @@ class LengthConstraint implements IConstraint {
             return $this->message;
         }
 
-        return s('Must have a length of "%s" characters.', $this->length);
+        return s('Must have a length of "%s".', $this->length);
     }
 
     /**

@@ -6,13 +6,13 @@ use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
 /**
- * Check if the value is in the list of allowed values.
+ * Check if the value is not in the list of forbidden values.
  */
-class AllowedValuesConstraint implements IConstraint {
+class ForbiddenConstraint implements IConstraint {
     /**
      * @var array
      */
-    protected $allowedValues;
+    protected $forbidden;
 
     /**
      * @var string
@@ -20,11 +20,11 @@ class AllowedValuesConstraint implements IConstraint {
     protected $message;
 
     /**
-     * @param array $values
+     * @param array $forbidden
      * @param string $message
      */
-    public function __construct(array $values, $message = null) {
-        $this->allowedValues = $values;
+    public function __construct(array $forbidden, $message = null) {
+        $this->forbidden = $forbidden;
         $this->message = $message;
     }
 
@@ -35,7 +35,7 @@ class AllowedValuesConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        return array_contains($this->allowedValues, $value);
+        return ! array_contains($this->forbidden, $value);
     }
 
     /**
@@ -47,8 +47,8 @@ class AllowedValuesConstraint implements IConstraint {
         }
 
         return s(
-            'Is not allowed, allowed values are "%s".',
-            implode(', ', $this->allowedValues)
+            'Invalid value, forbidden values are "%s".',
+            implode(', ', $this->forbidden)
         );
     }
 
@@ -57,7 +57,7 @@ class AllowedValuesConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'allowed_values' => $this->allowedValues,
+            'forbidden' => $this->forbidden,
         ];
     }
 }

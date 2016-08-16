@@ -6,13 +6,13 @@ use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
 /**
- * Check if the value has the given min length.
+ * Check if the value is in the list of allowed values.
  */
-class MinLengthConstraint implements IConstraint {
+class AllowedConstraint implements IConstraint {
     /**
-     * @var int
+     * @var array
      */
-    protected $min;
+    protected $allowed;
 
     /**
      * @var string
@@ -20,13 +20,11 @@ class MinLengthConstraint implements IConstraint {
     protected $message;
 
     /**
-     * MinLengthConstraint constructor.
-     *
-     * @param $min
+     * @param array $allowed
      * @param string $message
      */
-    public function __construct($min, $message = null) {
-        $this->min = $min;
+    public function __construct(array $allowed, $message = null) {
+        $this->allowed = $allowed;
         $this->message = $message;
     }
 
@@ -37,13 +35,7 @@ class MinLengthConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        if (is_string($value)) {
-            return strlen($value) >= $this->min;
-        } else if (is_array($value)) {
-            return count($value) >= $this->min;
-        }
-
-        return false;
+        return array_contains($this->allowed, $value);
     }
 
     /**
@@ -54,7 +46,10 @@ class MinLengthConstraint implements IConstraint {
             return $this->message;
         }
 
-        return s('Must not be shorter then "%s".', $this->min);
+        return s(
+            'Invalid value, allowed values are "%s".',
+            implode(', ', $this->allowed)
+        );
     }
 
     /**
@@ -62,7 +57,7 @@ class MinLengthConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'min' => $this->min,
+            'allowed' => $this->allowed,
         ];
     }
 }

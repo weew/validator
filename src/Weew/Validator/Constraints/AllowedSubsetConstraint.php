@@ -6,18 +6,13 @@ use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
 /**
- * Check if the value is inside the given range.
+ * Check that elements within array are allowed.
  */
-class ValueRangeConstraint implements IConstraint {
+class AllowedSubsetConstraint implements IConstraint {
     /**
-     * @var int
+     * @var array
      */
-    protected $min;
-
-    /**
-     * @var int
-     */
-    protected $max;
+    protected $allowed;
 
     /**
      * @var string
@@ -25,15 +20,11 @@ class ValueRangeConstraint implements IConstraint {
     protected $message;
 
     /**
-     * ValueRangeConstraint constructor.
-     *
-     * @param int $min
-     * @param int $max
+     * @param array $allowed
      * @param string $message
      */
-    public function __construct($min, $max, $message = null) {
-        $this->min = $min;
-        $this->max = $max;
+    public function __construct(array $allowed, $message = null) {
+        $this->allowed = $allowed;
         $this->message = $message;
     }
 
@@ -44,8 +35,14 @@ class ValueRangeConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        if (is_numeric($value)) {
-            return $value >= $this->min && $value <= $this->max;
+        if (is_array($value)) {
+            foreach ($value as $item) {
+                if ( ! array_contains($this->allowed, $item)) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         return false;
@@ -60,8 +57,8 @@ class ValueRangeConstraint implements IConstraint {
         }
 
         return s(
-            'Must have a value between "%s" and "%s".',
-            $this->min, $this->max
+            'Contains not allowed values, allowed values are "%s".',
+            implode(', ', $this->allowed)
         );
     }
 
@@ -70,8 +67,7 @@ class ValueRangeConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'min' => $this->min,
-            'max' => $this->max,
+            'allowed' => $this->allowed,
         ];
     }
 }

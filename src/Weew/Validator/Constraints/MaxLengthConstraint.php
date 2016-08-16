@@ -39,6 +39,8 @@ class MaxLengthConstraint implements IConstraint {
     public function check($value, IValidationData $data = null) {
         if (is_string($value)) {
             return strlen($value) <= $this->max;
+        } else if (is_array($value)) {
+            return count($value) <= $this->max;
         }
 
         return false;
@@ -52,7 +54,9 @@ class MaxLengthConstraint implements IConstraint {
             return $this->message;
         }
 
-        return s('Must not be longer then "%s" characters.', $this->max);
+        return s(
+            'Must not be longer then "%s".', $this->max
+        );
     }
 
     /**

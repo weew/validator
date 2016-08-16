@@ -13,7 +13,9 @@ class LengthConstraintTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($c->check('123'));
         $this->assertFalse($c->check('1234'));
         $this->assertFalse($c->check('123456'));
+        $this->assertFalse($c->check([1]));
         $this->assertTrue($c->check('12345'));
+        $this->assertTrue($c->check([1, 2, 3, 4, 5]));
     }
 
     public function test_get_options() {
