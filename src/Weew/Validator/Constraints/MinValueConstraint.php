@@ -5,14 +5,11 @@ namespace Weew\Validator\Constraints;
 use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
-/**
- * Check if the value is in the list of allowed values.
- */
-class AllowedConstraint implements IConstraint {
+class MinValueConstraint implements IConstraint {
     /**
-     * @var array
+     * @var int
      */
-    protected $validValues;
+    protected $min;
 
     /**
      * @var string
@@ -20,11 +17,13 @@ class AllowedConstraint implements IConstraint {
     protected $message;
 
     /**
-     * @param array $values
+     * MinValueConstraint constructor.
+     *
+     * @param int $min
      * @param string $message
      */
-    public function __construct(array $values, $message = null) {
-        $this->validValues = $values;
+    public function __construct($min, $message = null) {
+        $this->min = $min;
         $this->message = $message;
     }
 
@@ -35,7 +34,11 @@ class AllowedConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        return array_contains($this->validValues, $value);
+        if (is_numeric($value)) {
+            return $value >= $this->min;
+        }
+
+        return false;
     }
 
     /**
@@ -46,7 +49,9 @@ class AllowedConstraint implements IConstraint {
             return $this->message;
         }
 
-        return 'Is not allowed.';
+        return s(
+            'Must not be smaller than "%s".', $this->min
+        );
     }
 
     /**
@@ -54,7 +59,7 @@ class AllowedConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'allowed_values' => $this->validValues,
+            'min' => $this->min,
         ];
     }
 }

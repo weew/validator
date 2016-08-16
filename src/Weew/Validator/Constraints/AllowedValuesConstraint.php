@@ -6,18 +6,13 @@ use Weew\Validator\IConstraint;
 use Weew\Validator\IValidationData;
 
 /**
- * Check if the value is inside the given range.
+ * Check if the value is in the list of allowed values.
  */
-class RangeConstraint implements IConstraint {
+class AllowedValuesConstraint implements IConstraint {
     /**
-     * @var int
+     * @var array
      */
-    protected $min;
-
-    /**
-     * @var int
-     */
-    protected $max;
+    protected $allowedValues;
 
     /**
      * @var string
@@ -25,15 +20,11 @@ class RangeConstraint implements IConstraint {
     protected $message;
 
     /**
-     * RangeConstraint constructor.
-     *
-     * @param $min
-     * @param $max
+     * @param array $values
      * @param string $message
      */
-    public function __construct($min, $max, $message = null) {
-        $this->min = $min;
-        $this->max = $max;
+    public function __construct(array $values, $message = null) {
+        $this->allowedValues = $values;
         $this->message = $message;
     }
 
@@ -44,11 +35,7 @@ class RangeConstraint implements IConstraint {
      * @return bool
      */
     public function check($value, IValidationData $data = null) {
-        if(is_numeric($value)){
-            return $value >= $this->min && $value <= $this->max;
-        }
-
-        return false;
+        return array_contains($this->allowedValues, $value);
     }
 
     /**
@@ -60,8 +47,8 @@ class RangeConstraint implements IConstraint {
         }
 
         return s(
-            'Must have a value between "%s" and "%s".',
-            $this->min, $this->max
+            'Is not allowed, allowed values are "%s".',
+            implode(', ', $this->allowedValues)
         );
     }
 
@@ -70,8 +57,7 @@ class RangeConstraint implements IConstraint {
      */
     public function getOptions() {
         return [
-            'min' => $this->min,
-            'max' => $this->max
+            'allowed_values' => $this->allowedValues,
         ];
     }
 }

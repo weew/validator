@@ -32,7 +32,6 @@
 ## Available constraints
 
 - [Accepted](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AcceptedConstraint.php)
-- [Allowed](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AllowedConstraint.php)
 - [Alpha](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AlphaConstraint.php)
 - [AlphaNumeric](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AlphaNumericConstraint.php)
 - [DomainName](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/DomainNameConstraint.php)
@@ -51,7 +50,11 @@
 - [NotNull](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NotNullConstraint.php)
 - [Null](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NullConstraint.php)
 - [Numeric](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NumericConstraint.php)
-- [Range](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/RangeConstraint.php)
+- [Allowed Values](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/AllowedValuesConstraint.php)
+- [Not Allowed Values](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NotAllowedValuesConstraint.php)
+- [Value Range](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/ValueRangeConstraint.php)
+- [Min Value](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MinValueConstraint.php)
+- [Max Value](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MaxValueConstraint.php)
 - [Regex](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/RegexConstraint.php)
 - [String](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/StringConstraint.php)
 - [Url](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/UrlConstraint.php)
@@ -168,7 +171,7 @@ $result = $validator->check($data);
 Creating a new constraint is a fairly easy task. All you have to do is to implement the ```IConstraint``` interface. This is an example on how to create a simple constraint that makes sure that a number is within the given range.
 
 ```php
-class RangeConstraint implements IConstraint {
+class ValueRangeConstraint implements IConstraint {
     protected $min;
     protected $max;
     protected $message;
