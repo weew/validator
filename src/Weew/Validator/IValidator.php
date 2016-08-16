@@ -25,4 +25,27 @@ interface IValidator {
      * @return IConstraintGroup[]
      */
     function getConstraintGroups();
+
+    /**
+     * @param string $name
+     * @param IConstraint $constraint
+     *
+     * @return IValidator
+     */
+    function addConstraint($name, IConstraint $constraint);
+
+    /**
+     * @param string $name
+     * @param array $constraints
+     *
+     * @return IValidator
+     */
+    function addConstraints($name, array $constraints);
+
+    /**
+     * @param IConstraintGroup $constraintGroup
+     *
+     * @return IValidator
+     */
+    function addConstraintGroup(IConstraintGroup $constraintGroup);
 }
