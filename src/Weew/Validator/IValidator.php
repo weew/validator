@@ -9,7 +9,7 @@ interface IValidator {
      *
      * @return IValidationResult
      */
-    function check($data, array $groups);
+    function check($data, array $groups = []);
 
     /**
      * @return IPropertyReader
