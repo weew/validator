@@ -249,7 +249,7 @@ $input = [
 $result = $validator->addConstraint('items.#', new MinMaxLengthConstraint(3, 5));
 ```
 
-Result will contain an error with subject `items.1`.
+Result will contain an error with subject `#items.1`. As you see, there is a `#` prefix in front of subjects for wildcard keys. This way you can differentiate between subjects for values and subjects for keys.
 
 ## Property accessors
 

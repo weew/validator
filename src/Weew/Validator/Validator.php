@@ -131,8 +131,13 @@ class Validator implements IValidator {
 
         foreach ($groups as $group) {
             $values = $data->get($group->getName());
+            $isKeyWildcard = str_ends_with($group->getName(), '.#');
 
             foreach ($values as $name => $value) {
+                if ($isKeyWildcard) {
+                    $name = s('#%s', $name);
+                }
+
                 $group->setName($name);
                 $groupResult = $group->check($value, $data);
 

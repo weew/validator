@@ -107,7 +107,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($error->getConstraint() instanceof FailingConstraint);
     }
 
-    public function test_validator_accepts_inline_constraints() {
+    public function test_accepts_inline_constraints() {
         return;
         $data = ['foo' => 'bar', 'bar' => 'foo'];
         $validator = new Validator();
@@ -126,12 +126,12 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('foo', $error->getSubject());;
     }
 
-    public function test_validator_calls_configure_method() {
+    public function test_calls_configure_method() {
         $this->setExpectedException(Exception::class, 'foo bar baz');
         new CustomValidator();
     }
 
-    public function test_validator_passes_over_validation_data() {
+    public function test_passes_over_validation_data() {
         $validator = new Validator();
         $validator->addConstraint('foo', new AdvancedConstraint());
         $data = null;
@@ -146,7 +146,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(['foo' => 'bar'], $data->get('foo'));
     }
 
-    public function test_validator_validates_recursively() {
+    public function test_validates_recursively() {
         $validator = new Validator();
         $validator->addConstraint('foo.*.bar', new NotNullConstraint());
         $data = null;
@@ -164,5 +164,20 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(2, $result->errorCount());
         $this->assertEquals('foo.0.bar', $result->getErrors()[0]->getSubject());
         $this->assertEquals('foo.2.bar', $result->getErrors()[1]->getSubject());
+    }
+
+    public function test_validates_keys() {
+        $validator = new Validator();
+        $validator->addConstraint('foo.#', new StringConstraint());
+        $result = $validator->check([
+            'foo' => [
+                1 => 'bar',
+                2 => 'yolo',
+            ],
+        ]);
+
+        $this->assertEquals(2, $result->errorCount());
+        $this->assertEquals('#foo.1', $result->getErrors()[0]->getSubject());
+        $this->assertEquals('#foo.2', $result->getErrors()[1]->getSubject());
     }
 }
