@@ -119,14 +119,16 @@ class ValidationData implements IValidationData {
 
         if (count($keys) > 0) {
             foreach ($data as $itemKey => $itemValue) {
+                // since there are still selector keys left and the next
+                // item is not an array, it is safe to skip it
+                if ( ! is_array($itemValue)) {
+                    continue;
+                }
+
                 $nestedValues = $this->getValues($itemValue, $keys);
-                $isLastWildcard = ! array_contains($keys, ValidationToken::WILDCARD_VALUES);
 
                 foreach ($nestedValues as $nestedKey => $nestedValue) {
-                    // do no collect null values unless it is the last wildcard node
-                    if ($nestedValue !== null || $isLastWildcard) {
-                        $values[$this->buildKey($itemKey, $nestedKey)] = $nestedValue;
-                    }
+                    $values[$this->buildKey($itemKey, $nestedKey)] = $nestedValue;
                 }
             }
         }

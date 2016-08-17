@@ -36,6 +36,9 @@ class ValidationDataTest extends PHPUnit_Framework_TestCase {
                 'swag' => [
                     'yolo' => ['baz' => 5],
                     ['baz' => 6],
+                    'bam' => ['baz' => null],
+                    'bang' => [],
+                    'bong' => 'baz',
                 ],
             ]
         ]);
@@ -53,6 +56,9 @@ class ValidationDataTest extends PHPUnit_Framework_TestCase {
                 'swag' => [
                     'yolo' => ['baz' => 5],
                     ['baz' => 6],
+                    'bam' => ['baz' => null],
+                    'bang' => [],
+                    'bong' => 'baz',
                 ],
             ]
         ], $data->get('*'));
@@ -72,30 +78,14 @@ class ValidationDataTest extends PHPUnit_Framework_TestCase {
             'foo.bar.2' => ['baz' => 3],
         ], $data->get('*.bar.*'));
 
-        [
-            'foo' => [
-                'bar' => [
-                    ['baz' => 1],
-                    ['baz' => 2],
-                    ['baz' => 3],
-                ]
-            ],
-            'yolo' => [
-                'bar' => 4,
-                ['baz' => 5],
-                'swag' => [
-                    'yolo' => ['baz' => 5],
-                    ['baz' => 6],
-                ],
-            ]
-        ];
-
         $this->assertEquals([
             'foo.bar.0.baz' => 1,
             'foo.bar.1.baz' => 2,
             'foo.bar.2.baz' => 3,
             'yolo.swag.yolo.baz' => 5,
             'yolo.swag.0.baz' => 6,
+            'yolo.swag.bam.baz' => null,
+            'yolo.swag.bang.baz' => null,
         ], $data->get('*.*.*.baz'));
     }
 
