@@ -58,6 +58,7 @@
 - [MinMaxLength](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/MinMaxLengthConstraint.php)
 - [NotEmpty](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NotEmptyConstraint.php)
 - [NotNull](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NotNullConstraint.php)
+- [Nullable](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NullableConstraint.php)
 - [Null](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NullConstraint.php)
 - [Numeric](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/NumericConstraint.php)
 - [Regex](https://github.com/weew/validator/blob/master/src/Weew/Validator/Constraints/RegexConstraint.php)

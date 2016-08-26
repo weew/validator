@@ -147,7 +147,18 @@ class Validator implements IValidator {
             }
         }
 
-        return $result;
+        return $this->filterResult($result);
+    }
+
+    /**
+     * @param IValidationResult $result
+     *
+     * @return ValidationResult
+     */
+    protected function filterResult(IValidationResult $result) {
+        $resultFilter = new ValidationResultFilter();
+
+        return $resultFilter->removeNullableErrors($result);
     }
 
     /**
