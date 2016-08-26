@@ -6,7 +6,16 @@ class ValidationResult implements IValidationResult {
     /**
      * @var IValidationError[]
      */
-    protected $errors = [];
+    protected $errors;
+
+    /**
+     * ValidationResult constructor.
+     *
+     * @param IValidationError[] $errors
+     */
+    public function __construct(array $errors = []) {
+        $this->errors = $errors;
+    }
 
     /**
      * @param IValidationError $error
@@ -35,7 +44,7 @@ class ValidationResult implements IValidationResult {
      * @return bool
      */
     public function isOk() {
-        return $this->errorCount() === 0;
+        return $this->getErrorCount() === 0;
     }
 
     /**
@@ -48,7 +57,7 @@ class ValidationResult implements IValidationResult {
     /**
      * @return int
      */
-    public function errorCount() {
+    public function getErrorCount() {
         return count($this->getErrors());
     }
 

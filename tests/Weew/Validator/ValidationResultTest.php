@@ -30,11 +30,11 @@ class ValidationResultTest extends PHPUnit_Framework_TestCase {
     public function test_error_count() {
         $result = new ValidationResult();
         $error = new ValidationError('foo', 'bar', new StringConstraint());
-        $this->assertEquals(0, $result->errorCount());
+        $this->assertEquals(0, $result->getErrorCount());
         $result->addError($error);
-        $this->assertEquals(1, $result->errorCount());
+        $this->assertEquals(1, $result->getErrorCount());
         $result->addError($error);
-        $this->assertEquals(2, $result->errorCount());
+        $this->assertEquals(2, $result->getErrorCount());
     }
 
     public function test_is_ok() {

@@ -21,6 +21,11 @@ interface IValidationResult extends IArrayable {
     function getErrors();
 
     /**
+     * @return int
+     */
+    function getErrorCount();
+
+    /**
      * @return bool
      */
     function isOk();
@@ -29,11 +34,6 @@ interface IValidationResult extends IArrayable {
      * @return bool
      */
     function isFailed();
-
-    /**
-     * @return int
-     */
-    function errorCount();
 
     /**
      * @param IValidationResult $result

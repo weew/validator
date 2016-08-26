@@ -98,7 +98,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         $result = $validator->check($data);
         $this->assertTrue($result->isFailed());
 
-        $this->assertEquals(1, $result->errorCount());
+        $this->assertEquals(1, $result->getErrorCount());
         $errors = $result->getErrors();
         $this->assertEquals(1, count($errors));
         $error = $errors[0];
@@ -120,7 +120,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
         $validator->addConstraint('foo', new FailingConstraint());
         $result = $validator->check($data, [new ConstraintGroup('foo', [new PassingConstraint()])]);
         $this->assertTrue($result->isFailed());
-        $this->assertEquals(1, $result->errorCount());
+        $this->assertEquals(1, $result->getErrorCount());
         $error = $result->getErrors()[0];
         $this->assertTrue($error instanceof FailingConstraint);
         $this->assertEquals('foo', $error->getSubject());;
@@ -161,7 +161,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
             'yolo' => 'swag',
         ]);
 
-        $this->assertEquals(2, $result->errorCount());
+        $this->assertEquals(2, $result->getErrorCount());
         $this->assertEquals('foo.0.bar', $result->getErrors()[0]->getSubject());
         $this->assertEquals('foo.2.bar', $result->getErrors()[1]->getSubject());
     }
@@ -176,7 +176,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
             ],
         ]);
 
-        $this->assertEquals(2, $result->errorCount());
+        $this->assertEquals(2, $result->getErrorCount());
         $this->assertEquals('#foo.1', $result->getErrors()[0]->getSubject());
         $this->assertEquals('#foo.2', $result->getErrors()[1]->getSubject());
     }
